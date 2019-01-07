@@ -61,7 +61,7 @@ public class Test01 {
     double d2;
    
     d1 = 98765.43; //주의! 8바이트 부동소수점을 표현할 때는 f,f 접미사를 제거하라
-    d2= 98765.43456789;
+    d2 = 98765.43456789;
     System.out.println(d1);
     System.out.println(d2); // 유효자릿수 15자리까지 대부분 짤리지 않고 들어간다.
     
