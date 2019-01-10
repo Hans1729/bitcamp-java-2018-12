@@ -1,5 +1,5 @@
+// 4단계: 제약사항 보충 구현
 package bitcamp.lms;
-
 
 import java.sql.Date;
 import java.util.Scanner;
@@ -7,60 +7,52 @@ import java.util.Scanner;
 public class App {
 
   public static void main(String[] args) {
-
-    // 키보드 입력 스트림(System.in)을 스캐너 객체에 연결한다.
-    // => 스캐너는 입력 스트림으로 들어온 문자열을 줄 단위로 잘라주는 역할을 수행한다.
+    Lesson lesson = new Lesson();
     Scanner keyboard = new Scanner(System.in);
-      
-    int no = 0;
-    String title;
-    String contents;
-    Date startDate;
-    Date endDate;
-    int totalHours;
-    int dayHours;
 
-    while (true) {
-      // 콘솔에서 입력 받은 값을 변수에 저장한다.
+
+    while (lesson.index < 100) {
       System.out.print("번호? ");
-      no = Integer.parseInt(keyboard.nextLine());
+      lesson.no[lesson.index] = Integer.parseInt(keyboard.nextLine());
 
       System.out.print("수업명? ");
-      title = keyboard.nextLine();
+      lesson.title[lesson.index] = keyboard.nextLine();
 
       System.out.print("설명? ");
-      contents = keyboard.nextLine();
+      lesson.contents[lesson.index] = keyboard.nextLine();
 
       System.out.print("시작일? ");
-      startDate = Date.valueOf(keyboard.nextLine());
+      lesson.startDate[lesson.index] = Date.valueOf(keyboard.nextLine());
 
       System.out.print("종료일? ");
-      endDate = Date.valueOf(keyboard.nextLine());
+      lesson.endDate[lesson.index] = Date.valueOf(keyboard.nextLine());
 
       System.out.print("총수업시간? ");
-      totalHours = Integer.parseInt(keyboard.nextLine());
+      lesson.totalHours[lesson.index] = Integer.parseInt(keyboard.nextLine());
 
       System.out.print("일수업시간? ");
-      dayHours = Integer.parseInt(keyboard.nextLine());
+      lesson.dayHours[lesson.index] = Integer.parseInt(keyboard.nextLine());
 
-      System.out.print("계속 하시겠습니까?(Y/n)");
-      String str = keyboard.nextLine();
-      if (!str.equalsIgnoreCase("y") && !str.equalsIgnoreCase(""))
+      lesson.index++;
+
+      System.out.print("\n계속 입력하시겠습니까?(Y/n) ");
+      String input = keyboard.nextLine();
+      System.out.println();
+
+      if (!input.equalsIgnoreCase("y") && !input.equals(""))
         break;
     }
-    // 사용후 스캐너 객체의 자원을 해제한다.
-    // keyboard.close();
-  
-    System.out.println(); // 빈 줄 출력
- while(str){
-    System.out.printf("번호: %d\n", no);
-    System.out.printf("수업명: %s\n", title);
-    System.out.printf("설명: %s\n", contents);
-    System.out.printf("기간: %s ~ %s\n", startDate, endDate);
-    System.out.printf("총수업시간: %d 시간\n", totalHours);
-    System.out.printf("일수업시간: %d 시간\n", dayHours);
- }break;
-    }
 
+    keyboard.close();
+
+    int count = 0;
+
+    while (count < lesson.index) {
+      System.out.printf("%d, %-20s, %s ~ %s, %4d\n", lesson.no[count], lesson.title[count],
+          lesson.startDate[count], lesson.endDate[count], lesson.totalHours[count]);
+      count++;
+    }
   }
+}
+
 

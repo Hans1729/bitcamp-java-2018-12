@@ -8,38 +8,50 @@ public class App2 {
   public static void main(String[] args) {
     
     Scanner keyboard = new Scanner(System.in);
-
-    System.out.print("번호? ");
-    int no = Integer.parseInt(keyboard.nextLine());
+     
+    Member member = new Member();
     
-    System.out.print("이름? ");
-    String name = keyboard.nextLine();
-    
-    System.out.print("이메일? ");
-    String email = keyboard.nextLine();
-    
-    System.out.print("암호? ");
-    String password = keyboard.nextLine();
+    while (member.index < 30) {
+      System.out.print("번호? ");
+      member.no[member.index] = Integer.parseInt(keyboard.nextLine());
+      
+      System.out.print("이름? ");
+      member.name[member.index] = keyboard.nextLine();
+      
+      System.out.print("이메일? ");
+      member.email[member.index] = keyboard.nextLine();
+      
+      System.out.print("암호? ");
+      member.password[member.index] = keyboard.nextLine();
+  
+      System.out.print("사진? ");
+      member.photo[member.index] = keyboard.nextLine();
+  
+      System.out.print("전화? ");
+      member.tel[member.index] = keyboard.nextLine();
+  
+      member.registeredDate[member.index] = new Date(System.currentTimeMillis()); 
+      
+      member.index++;
+      
+      System.out.print("\n계속 입력하시겠습니까?(Y/n) ");
+      String answer = keyboard.nextLine().toLowerCase();
+      
+      if (!answer.equals("y") && answer.length() > 0) {
+        break;
+      }
 
-    System.out.print("사진? ");
-    String photo = keyboard.nextLine();
-
-    System.out.print("전화? ");
-    String tel = keyboard.nextLine();
-
-    Date registeredDate = new Date(System.currentTimeMillis()); 
-        
-    // 사용후 스캐너 객체의 자원을 해제한다.
+      System.out.println();
+    }
     keyboard.close();
     
-    System.out.println(); // 빈 줄 출력
+    System.out.println();
+     
     
-    System.out.printf("번호: %d\n", no);
-    System.out.printf("이름: %s\n", name);
-    System.out.printf("이메일: %s\n", email);
-    System.out.printf("암호: %s\n", password);
-    System.out.printf("사진: %s\n", photo);
-    System.out.printf("전화: %s\n", tel);
-    System.out.printf("가입일: %s\n", registeredDate);
+    for(int j=0; j < member.index; j++) {
+      System.out.printf("%3d, %-4s, %-20s, %-15s, %s\n", 
+          member.no[j], member.name[j], member.email[j], member.tel[j], member.registeredDate[j]); //왜 index가 안되지. .? 
+
+    }
   }
 }
