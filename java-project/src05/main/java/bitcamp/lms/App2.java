@@ -12,7 +12,7 @@ public class App2 {
     System.out.print("번호? ");
     int no = Integer.parseInt(keyboard.nextLine());
     
-    System.out.print("이름? ");
+    System.out.preint("이름? ");
     String name = keyboard.nextLine();
     
     System.out.print("이메일? ");
