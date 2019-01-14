@@ -7,13 +7,13 @@ public class Test06 {
     // => 0개 이상의 값을 전달한다.
     int result = plus(); // 아규먼트를 넘겨주지 않아도 된다. 왜? 0개 이상이니까!
     System.out.println(result);
-    
+ 
     result = plus(2);
     System.out.println(result);
-    
+  
     result = plus(2, 3);
     System.out.println(result);
-    
+  
     result = plus(2, 3, 4);
     System.out.println(result);
     
@@ -60,7 +60,7 @@ public class Test06 {
     
     // 가변 파라미터는 배열 레퍼런스처럼 사용한다.
     int sum = 0; // <== 메서드 안에 선언된 변수를 "로컬 변수(local variable)"라 한다.
-                 // <== 파라미터도 로컬 변수입니까? 예. 로컬 변수이다. 
+                     // <== 파라미터도 로컬 변수입니까? 예. 로컬 변수이다. 
     for (int i = 0; i < value.length; i++) {
       sum += value[i];
     }

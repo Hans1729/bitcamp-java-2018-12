@@ -18,7 +18,7 @@ public class Test10 {
     System.out.println(value);
   }
   
-  static void m3(int value) {
+  static void m3(int value){
     System.out.println(++value);
   }
 }

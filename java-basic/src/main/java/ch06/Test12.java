@@ -16,7 +16,7 @@ public class Test12 {
     
     System.out.println(sum2(5));
     // 위의 알고리즘(결과를 내는 방식)은 다음 수학 공식과 같다.
-    // sum(n) = n + sum(n-1)
+   // sum(n) = n + sum(n-1)
   }
   
   static int sum1(int a, int b) {

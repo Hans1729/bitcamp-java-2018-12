@@ -16,7 +16,7 @@ public class Test08 {
   
   // 1) 가변 파라미터는 무조건 마지막 순서에 와야 한다. 
   //static int plus1(int... value, String name) { // 컴파일 오류!
-  static void compute(String name, int... value) {  
+  static void compute(String name, int ... value) {  
     int sum = 0; 
     for (int i = 0; i < value.length; i++) {
       sum += value[i];

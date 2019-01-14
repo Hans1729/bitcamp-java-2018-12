@@ -32,9 +32,9 @@ public class Test03 {
     //          클래스명 변수명;
     
     Score s1;  // Score 설계도에 따라 준비한 메모리(변수들)의 주소를 저장하는 변수 
-               // 이렇게 주소를 저장하는 변수를 "레퍼런스(reference)"라 부른다.
+                   // 이렇게 주소를 저장하는 변수를 "레퍼런스(reference)"라 부른다.
     s1 = new Score(); // Score 설계도에 따라 메모리(변수들)를 준비시킨다.
-                      // 그리고 메모리의 주소를 레퍼런스에 저장한다.
+                        // 그리고 메모리의 주소를 레퍼런스에 저장한다.
     
     Class c = Class.forName("ch07.Test03$Score");
     Score s3 = (Score)c.newInstance();
