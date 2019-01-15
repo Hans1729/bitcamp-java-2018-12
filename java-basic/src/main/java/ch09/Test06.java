@@ -19,7 +19,7 @@ public class Test06 {
     c1.plus(2);
     c2.plus(6);
     
-    c1.multiple(3);
+    c1.muitipule(3);
     c2.divide(2);
     
     c1.minus(2);

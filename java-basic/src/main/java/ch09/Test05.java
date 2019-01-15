@@ -16,7 +16,7 @@ public class Test05 {
     Calculator3.plus(c1/*result 변수가 있는 인스턴스 주소*/, 2);
     Calculator3.plus(c2, 6);
     
-    Calculator3.multiple(c1, 3);
+    Calculator3.muitipule(c1, 3);
     Calculator3.divide(c2, 2);
     
     Calculator3.minus(c1, 2);
