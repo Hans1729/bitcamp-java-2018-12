@@ -1,13 +1,27 @@
 package bitcamp.lms.handler;
 
+import java.util.Arrays;
 import bitcamp.lms.domain.Board;
 
 public class BoardList {
+  static final int LENGTH = 3;
+  Board[] arr = new Board[LENGTH];
+  int size = 0; 
+ 
   public Board[] toArray() {
-    return null;
+     Board[] a = new Board[size];
+       for(int i=0; i <size; i++){
+       a[i] = this.arr[i];
+       }
+    return a;
   }
   
   public void add(Board board) {
-    
+    if(size == arr.length) {
+      arr = Arrays.copyOf(arr, arr.length + (arr.length >> 1));
+      
+      System.out.printf("배열이 증가함 %d\n", arr.length);
+    }
+  arr[size++] = board;
   }
 }
