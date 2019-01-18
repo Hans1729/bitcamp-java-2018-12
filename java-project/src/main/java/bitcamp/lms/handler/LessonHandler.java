@@ -7,16 +7,17 @@ import bitcamp.lms.domain.Lesson;
 
 public class LessonHandler {
 
-  LessonList lessonList = new LessonList();
+  ArrayList<Lesson> list;
   Scanner keyboard;
 
   
   public LessonHandler(Scanner keyboard) {
     this.keyboard = keyboard;
+    this.list = new ArrayList<>();
   }
   
   public void listLesson() {
-    Lesson[] lessons = lessonList.toArray();
+    Lesson[] lessons = list.toArray(new Lesson[0]);
     
     for (Lesson lesson : lessons ){
       System.out.printf("%3d, %-15s, %10s ~ %10s, %4d\n", 
@@ -49,7 +50,7 @@ public class LessonHandler {
     System.out.print("일수업시간? ");
     lesson.setDayHours(Integer.parseInt(keyboard.nextLine()));
     
-    lessonList.add(lesson);
+    list.add(lesson);
     System.out.println("저장하였습니다");
    
 

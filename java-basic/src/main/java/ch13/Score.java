@@ -14,6 +14,8 @@ public class Score {
   protected int sum;
   protected float aver;
   
+  
+  //getter/setter
   public String getName() {
     return this.name;
   }

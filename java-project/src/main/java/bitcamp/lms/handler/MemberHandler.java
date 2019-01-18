@@ -8,16 +8,17 @@ import bitcamp.lms.domain.Member;
 public class MemberHandler {
   
 
-    MemberList memberList = new MemberList();  
+    ArrayList<Member> list;
     Scanner keyboard;
 
   
   public MemberHandler(Scanner keyboard) {
     this.keyboard = keyboard;
+    this.list = new ArrayList<>();
   }
   
     public void listMember() {
-    Member[] members = memberList.toArray();
+    Member[] members = list.toArray(new Member[0]);
        
     for (Member member : members ) {
       System.out.printf("%3d, %-4s, %-20s, %-15s, %s\n", 
@@ -48,7 +49,7 @@ public class MemberHandler {
     member.setTel(keyboard.nextLine());
   
     member.setRegisteredDate(new Date(System.currentTimeMillis())); 
-    memberList.add(member);
+    list.add(member);
 
     System.out.println("저장하였습니다.");
   }
