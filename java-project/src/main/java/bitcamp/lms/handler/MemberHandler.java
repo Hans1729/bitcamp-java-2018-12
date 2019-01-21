@@ -3,27 +3,24 @@ package bitcamp.lms.handler;
 import java.sql.Date;
 import java.util.Scanner;
 import bitcamp.lms.domain.Member;
-
+import bitcamp.util.ArrayList;
 
 public class MemberHandler {
   
-
-    ArrayList<Member> list;
-    Scanner keyboard;
-
+  Scanner keyboard;
+  ArrayList<Member> list;
   
   public MemberHandler(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = new ArrayList<>();
+    this.list = new ArrayList<>(20);
   }
   
-    public void listMember() {
-    Member[] members = list.toArray(new Member[0]);
-       
-    for (Member member : members ) {
+  public void listMember() {
+    Member[] members = list.toArray(new Member[] {});
+    for (Member member : members) {
       System.out.printf("%3d, %-4s, %-20s, %-15s, %s\n", 
-          member.getNo(), member.getName(), member.getEmail(), 
-          member.getTel(), member.getRegisteredDate());
+          member.getNo(), member.getName(), 
+          member.getEmail(), member.getTel(), member.getRegisteredDate());
     }
   }
 
@@ -49,8 +46,9 @@ public class MemberHandler {
     member.setTel(keyboard.nextLine());
   
     member.setRegisteredDate(new Date(System.currentTimeMillis())); 
+    
     list.add(member);
-
+    
     System.out.println("저장하였습니다.");
   }
 

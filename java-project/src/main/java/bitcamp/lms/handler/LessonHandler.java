@@ -1,36 +1,33 @@
 package bitcamp.lms.handler;
-
 import java.sql.Date;
 import java.util.Scanner;
 import bitcamp.lms.domain.Lesson;
-
+import bitcamp.util.ArrayList;
 
 public class LessonHandler {
 
-  ArrayList<Lesson> list;
   Scanner keyboard;
+  ArrayList<Lesson> list;
 
-  
   public LessonHandler(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = new ArrayList<>();
+    this.list = new ArrayList<>(20);
   }
-  
+
   public void listLesson() {
-    Lesson[] lessons = list.toArray(new Lesson[0]);
-    
-    for (Lesson lesson : lessons ){
+    Lesson[] lessons = list.toArray(new Lesson[] {});
+    for (Lesson lesson : lessons) {
       System.out.printf("%3d, %-15s, %10s ~ %10s, %4d\n", 
-          lesson.getNo(), lesson.getTitle(), lesson.getStartDate(), 
-          lesson.getEndDate(), lesson.getTotalHours());
+          lesson.getNo(), lesson.getTitle(), 
+          lesson.getStartDate(), lesson.getEndDate(), lesson.getTotalHours());
     }
   }
 
   public void addLesson() {
     Lesson lesson = new Lesson();
-    
+
     System.out.print("번호? ");
-    lesson.setNo(Integer.parseInt(keyboard.nextLine()));// Integer.parseInt(keyboard.nextLine());
+    lesson.setNo(Integer.parseInt(keyboard.nextLine()));
 
     System.out.print("수업명? ");
     lesson.setTitle(keyboard.nextLine());
@@ -49,12 +46,36 @@ public class LessonHandler {
 
     System.out.print("일수업시간? ");
     lesson.setDayHours(Integer.parseInt(keyboard.nextLine()));
-    
-    list.add(lesson);
-    System.out.println("저장하였습니다");
-   
 
- 
+    list.add(lesson);
+
+    System.out.println("저장하였습니다.");
+  }
+
+  public void detailLesson(int no) {
+    System.out.print("번호:?");
+    Integer.parseInt(keyboard.nextLine());
+   
+    for(int i=0; i < list.size(); i ++) {
+      Lesson item = list.get(i);
+      if(item.getNo == no) {
+        return i;
+  }
+      
+    }
+    return -1 
+  }
+
+  public void updateLesson() {
+    System.out.print("번호:? ");
+    Integer.parseInt(keyboard.nextLine());
+    
+  }
+
+  public void deleteLesson() {
+    System.out.print("번호:?");
+    Integer.parseInt(keyboard.nextLine());
+    
   }
 
 }
