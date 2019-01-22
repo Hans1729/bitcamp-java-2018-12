@@ -27,7 +27,7 @@ public class App {
         lessonHandler.listLesson();
 
       } else if (command.equals("/lesson/detail")) {
-        lessonHandler.detailLesson();
+        /* lessonHandler.detailLesson(); */
 
       } else if (command.equals("/lesson/update")) {
         lessonHandler.updateLesson();
