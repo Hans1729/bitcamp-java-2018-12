@@ -2,16 +2,16 @@ package bitcamp.lms.handler;
 import java.sql.Date;
 import java.util.Scanner;
 import bitcamp.lms.domain.Board;
-import bitcamp.util.ArrayList;
+import bitcamp.util.LinkedList;
 
 public class BoardHandler {
   
   Scanner keyboard;
-  ArrayList<Board> list;
+  LinkedList<Board> list;
   
   public BoardHandler(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = new ArrayList<>(20);
+    this.list = new LinkedList<>();
   }
   
   public void listBoard() {

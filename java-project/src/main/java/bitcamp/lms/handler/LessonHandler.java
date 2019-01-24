@@ -2,20 +2,20 @@ package bitcamp.lms.handler;
 import java.sql.Date;
 import java.util.Scanner;
 import bitcamp.lms.domain.Lesson;
-import bitcamp.util.ArrayList;
+import bitcamp.util.LinkedList;
 
 public class LessonHandler {
 
   Scanner keyboard;
-  ArrayList<Lesson> list;
+  LinkedList<Lesson> list;
 
   public LessonHandler(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = new ArrayList<>(20);
+    this.list = new LinkedList<>();
   }
 
   public void listLesson() {
-    Lesson[] lessons = list.toArray(new Lesson[] {});
+    Lesson[] lessons = list.toArray[];
     for (Lesson lesson : lessons) {
       System.out.printf("%3d, %-15s, %10s ~ %10s, %4d\n", 
           lesson.getNo(), lesson.getTitle(), 
@@ -52,18 +52,18 @@ public class LessonHandler {
     System.out.println("저장하였습니다.");
   }
 
-  public void detailLesson(int no) {
+  public int detailLesson(int no) {
     System.out.print("번호:?");
     Integer.parseInt(keyboard.nextLine());
    
     for(int i=0; i < list.size(); i ++) {
       Lesson item = list.get(i);
-      if(item.getNo == no) {
+      if(item.getNo() == no) {
         return i;
   }
       
     }
-    return -1 
+    return -1 ;
   }
 
   public void updateLesson() {

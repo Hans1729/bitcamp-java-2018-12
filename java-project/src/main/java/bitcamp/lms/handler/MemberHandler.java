@@ -4,19 +4,20 @@ import java.sql.Date;
 import java.util.Scanner;
 import bitcamp.lms.domain.Member;
 import bitcamp.util.ArrayList;
+import bitcamp.util.LinkedList;
 
 public class MemberHandler {
   
   Scanner keyboard;
-  ArrayList<Member> list;
+  LinkedList<Member> list;
   
   public MemberHandler(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = new ArrayList<>(20);
+    this.list = new LinkedList<>();
   }
   
   public void listMember() {
-    Member[] members = list.toArray(new Member[] {});
+    Member[] members = new Member[list.size()];
     for (Member member : members) {
       System.out.printf("%3d, %-4s, %-20s, %-15s, %s\n", 
           member.getNo(), member.getName(), 

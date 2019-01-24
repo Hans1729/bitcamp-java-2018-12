@@ -1,6 +1,6 @@
 package ch18.d;
 
 public interface ProtocolA {
-    void m1();
-    void m2();
+  void m1();
+  void m2();
 }

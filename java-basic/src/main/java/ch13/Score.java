@@ -15,6 +15,9 @@ public class Score {
   protected float aver;
   
   
+  public Score(String string, int i, int j, int k) {
+    // TODO Auto-generated constructor stub
+  }
   //getter/setter
   public String getName() {
     return this.name;

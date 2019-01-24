@@ -7,5 +7,4 @@ public class Monami {
   public void press(boolean press) {
     this.use = press;
   }
-
 }
