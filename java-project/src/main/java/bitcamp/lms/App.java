@@ -12,7 +12,7 @@ public class App {
 
   // 사용자가 입력한 명령을 보관할 스택 준비
   static Stack<String> commandHistory = new Stack<>();
-
+  
   public static void main(String[] args) {
     
     LessonHandler lessonHandler = new LessonHandler(keyboard);
