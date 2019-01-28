@@ -7,16 +7,26 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
+
 import bitcamp.lms.domain.Board;
+import bitcamp.lms.domain.Lesson;
+import bitcamp.lms.domain.Member;
 import bitcamp.lms.handler.BoardAddCommand;
 import bitcamp.lms.handler.BoardDeleteCommand;
 import bitcamp.lms.handler.BoardDetailCommand;
-import bitcamp.lms.handler.BoardHandler;
 import bitcamp.lms.handler.BoardListCommand;
 import bitcamp.lms.handler.BoardUpdateCommand;
 import bitcamp.lms.handler.Command;
-import bitcamp.lms.handler.LessonHandler;
-import bitcamp.lms.handler.MemberHandler;
+import bitcamp.lms.handler.LessonAddCommand;
+import bitcamp.lms.handler.LessonDeleteCommand;
+import bitcamp.lms.handler.LessonDetailCommand;
+import bitcamp.lms.handler.LessonListCommand;
+import bitcamp.lms.handler.LessonUpdateCommand;
+import bitcamp.lms.handler.MemberAddCommand;
+import bitcamp.lms.handler.MemberDeleteCommand;
+import bitcamp.lms.handler.MemberDetailCommand;
+import bitcamp.lms.handler.MemberListCommand;
+import bitcamp.lms.handler.MemberUpdateCommand;
 
 public class App {
 
@@ -29,16 +39,34 @@ public class App {
   public static void main(String[] args) {
     HashMap<String, Command> CommandMap = new HashMap<>();
     
-    LessonHandler lessonHandler = new LessonHandler(keyboard, new ArrayList<>());
-    MemberHandler memberHandler = new MemberHandler(keyboard, new LinkedList<>());
+    ArrayList<Lesson> lessonlist = new ArrayList<>();
+    
+    
+    
+    
+    ArrayList<Member> memberlist = new ArrayList<>();
     ArrayList<Board> boardlist = new ArrayList<>();
-    BoardHandler boardHandler2 = new BoardHandler(keyboard, new LinkedList<>());
+    
 
+    
+    CommandMap.put("/Lesson/add", new LessonAddCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/list", new LessonListCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/detail", new LessonDetailCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/update", new LessonUpdateCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/delete", new LessonDeleteCommand(keyboard, lessonlist));
+    
+    
     CommandMap.put("/board/add", new BoardAddCommand(keyboard, boardlist));
     CommandMap.put("/board/list", new BoardListCommand(keyboard, boardlist));
     CommandMap.put("/board/detail", new BoardDetailCommand(keyboard, boardlist));
     CommandMap.put("/board/update", new BoardUpdateCommand(keyboard, boardlist));
     CommandMap.put("/board/delete", new BoardDeleteCommand(keyboard, boardlist));
+    
+    CommandMap.put("/member/add", new MemberAddCommand(keyboard, memberlist));
+    CommandMap.put("/member/list", new MemberListCommand(keyboard, memberlist));
+    CommandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberlist));
+    CommandMap.put("/member/update", new MemberUpdateCommand(keyboard, memberlist));
+    CommandMap.put("/member/delete", new MemberDeleteCommand(keyboard, memberlist));
 
     while (true) {
       String command = prompt();
