@@ -1,10 +1,22 @@
 package bitcamp.lms;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
+import java.util.Stack;
+import bitcamp.lms.domain.Board;
+import bitcamp.lms.handler.BoardAddCommand;
+import bitcamp.lms.handler.BoardDeleteCommand;
+import bitcamp.lms.handler.BoardDetailCommand;
 import bitcamp.lms.handler.BoardHandler;
+import bitcamp.lms.handler.BoardListCommand;
+import bitcamp.lms.handler.BoardUpdateCommand;
+import bitcamp.lms.handler.Command;
 import bitcamp.lms.handler.LessonHandler;
 import bitcamp.lms.handler.MemberHandler;
-import bitcamp.util.Stack;
 
 public class App {
 
@@ -12,106 +24,83 @@ public class App {
 
   // 사용자가 입력한 명령을 보관할 스택 준비
   static Stack<String> commandHistory = new Stack<>();
-  
+  static Queue<String> commandHistory2 = new LinkedList<>();
+
   public static void main(String[] args) {
+    HashMap<String, Command> CommandMap = new HashMap<>();
     
-    LessonHandler lessonHandler = new LessonHandler(keyboard);
-    MemberHandler memberHandler = new MemberHandler(keyboard);
-    BoardHandler boardHandler1 = new BoardHandler(keyboard);
-    BoardHandler boardHandler2 = new BoardHandler(keyboard);
-    
+    LessonHandler lessonHandler = new LessonHandler(keyboard, new ArrayList<>());
+    MemberHandler memberHandler = new MemberHandler(keyboard, new LinkedList<>());
+    ArrayList<Board> boardlist = new ArrayList<>();
+    BoardHandler boardHandler2 = new BoardHandler(keyboard, new LinkedList<>());
+
+    CommandMap.put("/board/add", new BoardAddCommand(keyboard, boardlist));
+    CommandMap.put("/board/list", new BoardListCommand(keyboard, boardlist));
+    CommandMap.put("/board/detail", new BoardDetailCommand(keyboard, boardlist));
+    CommandMap.put("/board/update", new BoardUpdateCommand(keyboard, boardlist));
+    CommandMap.put("/board/delete", new BoardDeleteCommand(keyboard, boardlist));
+
     while (true) {
       String command = prompt();
 
       // 사용자가 입력한 명령을 스택에 보관한다.
       commandHistory.push(command);
-      
-      if (command.equals("/lesson/add")) {
-        lessonHandler.addLesson();
-        
-      } else if (command.equals("/lesson/list")) {
-        lessonHandler.listLesson();
-        /*
-         * } else if (command.equals("/lesson/detail")) { lessonHandler.detailLesson();
-         */
-      
-      } else if (command.equals("/lesson/update")) {
-        lessonHandler.updateLesson();
-      
-      } else if (command.equals("/lesson/delete")) {
-        lessonHandler.deleteLesson();
-      
-      } else if (command.equals("/member/add")) {
-        memberHandler.addMember();
-        
-      } else if (command.equals("/member/list")) {
-        memberHandler.listMember();
-        
-        /*
-         * } else if (command.equals("/member/detail")) { memberHandler.detailMember();
-         * 
-         * } else if (command.equals("/member/update")) { memberHandler.updateMember();
-         * 
-         * } else if (command.equals("/member/delete")) { memberHandler.deleteMember();
-         */
-      } else if (command.equals("/board/add")) {
-        boardHandler1.addBoard();
-        
-      } else if (command.equals("/board/list")) {
-        boardHandler1.listBoard();
-        
-        /*
-         * } else if (command.equals("/board/detail")) { boardHandler1.detailBoard();
-         * 
-         * } else if (command.equals("/board/update")) { boardHandler1.updateBoard();
-         * 
-         * } else if (command.equals("/board/delete")) { boardHandler1.deleteBoard();
-         */
-      
-      } else if (command.equals("/board2/add")) {
-        boardHandler2.addBoard();
-        
-      } else if (command.equals("/board2/list")) {
-        boardHandler2.listBoard();
-        
-        /*
-         * } else if (command.equals("/board2/detail")) { boardHandler2.detailBoard();
-         * 
-         * } else if (command.equals("/board2/update")) { boardHandler2.updateBoard();
-         * 
-         * } else if (command.equals("/board2/delete")) { boardHandler2.deleteBoard();
-         */
-      
-      } else if (command.equals("quit")) {
+
+      // 사용자가 입력한 명령을 큐에 보관한다.
+      commandHistory2.offer(command);
+
+      if (command.equals("quit")) {
         System.out.println("안녕!");
         break;
-        
       } else if (command.equals("history")) {
-        printCommandHistory();
-        
-      } else {
-        System.out.println("실행할 수 없는 명령입니다.");
+        printCommandHistory(new Iterator<String>() {
+          int index = commandHistory.size() - 1;
+
+          @Override
+          public boolean hasNext() {
+            return index >= 0;
+          }
+          @Override
+          public String next() {
+            return commandHistory.get(index--);
+          }
+        });
       }
-      
-      System.out.println(); // 결과 출력 후 빈 줄 출력
+       else if (command.equals("history2")) {
+        printCommandHistory(commandHistory2.iterator());
+      } else {
+           Command commandHandler = CommandMap.get(command);
+     if(commandHandler == null) 
+        System.out.println("실행할 수 없는 명령입니다.");
+     else
+       commandHandler.execute();
+      }
+      System.out.println();
     }
 
     keyboard.close();
   }
 
-  private static void printCommandHistory() {
-    try { 
-    Stack<String> temp = commandHistory.clone();
-    while (!commandHistory.empty()) {
-      System.out.println(commandHistory.pop());
-    }
-    }catch (Exception e) {
+  private static void printCommandHistory(Iterator<String> iterator) {
+    try {
+      int count = 0;
+      while (iterator.hasNext()) {
+        System.out.println(iterator.next());
+        if (++count % 5 == 0) {
+          System.out.print(":");
+          String input = keyboard.nextLine();
+          if (input.equalsIgnoreCase("q"))
+            break;
+        }
+      }
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private static String prompt() {
+  private static String prompt(){
     System.out.print("명령> ");
     return keyboard.nextLine().toLowerCase();
   }
 }
+

@@ -2,7 +2,7 @@ package bitcamp.lms.domain;
 
 import java.sql.Date;
 
-public class Lesson {
+public class Lesson implements Cloneable{
   
   private int no;
   private String title;
@@ -12,6 +12,11 @@ public class Lesson {
   private int totalHours;
   private int dayHours;
   
+  @Override
+  public Lesson clone() throws CloneNotSupportedException {
+    // TODO Auto-generated method stub
+    return (Lesson) super.clone();
+  }
   public int getNo() {
     return no;
   }

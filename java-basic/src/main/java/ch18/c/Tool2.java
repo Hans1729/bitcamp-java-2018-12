@@ -42,4 +42,3 @@ public class Tool2 implements ProtocolA, ProtocolC {
 
 
 
-
