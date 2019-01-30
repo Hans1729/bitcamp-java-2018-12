@@ -1,15 +1,9 @@
 package bitcamp.lms;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
@@ -41,13 +35,10 @@ public class App {
   // 사용자가 입력한 명령을 보관할 스택 준비
   static Stack<String> commandHistory = new Stack<>();
   static Queue<String> commandHistory2 = new LinkedList<>();
-  static ArrayList<Lesson> lessonlist = new ArrayList<>();
 
   public static void main(String[] args) {
-
-    loadLessonDate();
-
     HashMap<String, Command> CommandMap = new HashMap<>();
+    ArrayList<Lesson> lessonlist = new ArrayList<>();
     ArrayList<Member> memberlist = new ArrayList<>();
     ArrayList<Board> boardlist = new ArrayList<>();
 
@@ -82,7 +73,7 @@ public class App {
       commandHistory2.offer(command);
 
       if (command.equals("quit")) {
-        quit();
+        System.out.println("안녕!");
         break;
       } else if (command.equals("history")) {
         printCommandHistory(new Iterator<String>() {
@@ -134,52 +125,4 @@ public class App {
     System.out.print("명령> ");
     return keyboard.nextLine().toLowerCase();
   }
-
-  private static void quit() {
-    saveLessonDate();
-    System.out.println("안녕!");
-  }
-
-  private static void loadLessonDate() {
-   try ( FileReader in = new FileReader("lesson.csv");
-       Scanner in2 = new Scanner(in){
-       
-     while(true) {
-       lessonlist.add(Lesson.valueOf(in2.nextLine()));
-     
-      
-   lessonlist.add(lesson);
-       }
-     }
-  }catch(FileNotFoundException e)
-  {
-
-    e.printStackTrace();
-  }catch(
-  IOException e)
-  {
- 
-    e.printStackTrace();
-  }catch(
-  NoSuchElementException e)
-  {
-    System.out.println("수업 데이터 로딩 완료!");
-  }
-  }
-
-  private static void saveLessonDate() {
-    try (FileWriter out = new FileWriter("lesson.csv")) {
-      for (Lesson lesson : lessonlist) {
-        out.write(String.format("%s,%s,%s,%s,%s,%d,%d\n", lesson.getNo(), lesson.getTitle(),
-            lesson.getContents(), lesson.getStartDate(), lesson.getEndDate(),
-            lesson.getTotalHours(), lesson.getDayHours()));
-
-      }
-
-    } catch (IOException e) {
-
-      e.printStackTrace();
-    }
-  }
 }
-
