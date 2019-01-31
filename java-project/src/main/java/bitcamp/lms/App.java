@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
+
 import bitcamp.lms.domain.Board;
 import bitcamp.lms.domain.Lesson;
 import bitcamp.lms.domain.Member;
@@ -32,7 +33,10 @@ import bitcamp.lms.handler.MemberDeleteCommand;
 import bitcamp.lms.handler.MemberDetailCommand;
 import bitcamp.lms.handler.MemberListCommand;
 import bitcamp.lms.handler.MemberUpdateCommand;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8e750c930de10b9752559e6935da084bd2113386
 
 public class App {
 
@@ -48,6 +52,7 @@ public class App {
     loadLessonDate();
 
     HashMap<String, Command> CommandMap = new HashMap<>();
+<<<<<<< HEAD
     ArrayList<Member> memberlist = new ArrayList<>();
     ArrayList<Board> boardlist = new ArrayList<>();
 
@@ -63,12 +68,37 @@ public class App {
     CommandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberlist));
     CommandMap.put("/member/update", new MemberUpdateCommand(keyboard, memberlist));
     CommandMap.put("/member/delete", new MemberDeleteCommand(keyboard, memberlist));
+=======
+    
+    ArrayList<Lesson> lessonlist = new ArrayList<>();
+    
+    
+    
+    
+    ArrayList<Member> memberlist = new ArrayList<>();
+    ArrayList<Board> boardlist = new ArrayList<>();
+    
+>>>>>>> 8e750c930de10b9752559e6935da084bd2113386
 
+    
+    CommandMap.put("/Lesson/add", new LessonAddCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/list", new LessonListCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/detail", new LessonDetailCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/update", new LessonUpdateCommand(keyboard, lessonlist));
+    CommandMap.put("/Lesson/delete", new LessonDeleteCommand(keyboard, lessonlist));
+    
+    
     CommandMap.put("/board/add", new BoardAddCommand(keyboard, boardlist));
     CommandMap.put("/board/list", new BoardListCommand(keyboard, boardlist));
     CommandMap.put("/board/detail", new BoardDetailCommand(keyboard, boardlist));
     CommandMap.put("/board/update", new BoardUpdateCommand(keyboard, boardlist));
     CommandMap.put("/board/delete", new BoardDeleteCommand(keyboard, boardlist));
+    
+    CommandMap.put("/member/add", new MemberAddCommand(keyboard, memberlist));
+    CommandMap.put("/member/list", new MemberListCommand(keyboard, memberlist));
+    CommandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberlist));
+    CommandMap.put("/member/update", new MemberUpdateCommand(keyboard, memberlist));
+    CommandMap.put("/member/delete", new MemberDeleteCommand(keyboard, memberlist));
 
 
 
