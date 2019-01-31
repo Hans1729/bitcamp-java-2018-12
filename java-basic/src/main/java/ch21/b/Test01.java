@@ -9,8 +9,7 @@ public class Test01 {
     Scanner keyboard = new Scanner(System.in);
     System.out.print("숫자를 입력하세요: ");
     String input = keyboard.nextLine();
-
-   
+    
     try {
       // 예외가 발생할 수 있는 코드를 두는 블록 
       int value = Integer.parseInt(input);
@@ -25,8 +24,7 @@ public class Test01 {
     } finally {
       // 정상적으로 실행하든 예외가 발생되든 무조건 try ~ catch 블록을 벗어나기 전에 실행되는 블록
       // => 필수 블록이 아니다. 생략해도 된다.
-      System.out.println("종료\n" + 
-          "  @Override합니다!");
+      System.out.println("종료합니다!");
       keyboard.close();
     }
     

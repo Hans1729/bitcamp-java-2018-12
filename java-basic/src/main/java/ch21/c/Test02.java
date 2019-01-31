@@ -26,7 +26,7 @@ public class Test02 {
     try {
       Scanner keyboard = new Scanner(System.in);
       Class<?> clazz = Class.forName("ch21.c.PlusCommand2");
-      Constructor<?> constructor = clazz.getConstructor(Scanner.class); // 키보드
+      Constructor<?> constructor = clazz.getConstructor(Scanner.class);
       Command command = (Command) constructor.newInstance(keyboard);
       command.execute();
       

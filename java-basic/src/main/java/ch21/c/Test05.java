@@ -17,7 +17,7 @@ public class Test05 {
     // => 목록에서 인덱스 지정한 위치의 값을 꺼내준다.
     // => 만약 인덱스가 무효하다면 IndexOutOfBoundsException 예외가 발생한다.
     // => IndexOutOfBoundsException은 RuntimeException 계열의 예외 클래스이다.
-     //
+    //
     
     // RuntimeException 계열의 예외 처리하기
     // 1) try ~ catch를 사용하지 않으면 자동으로 호출자에게 보고된다.

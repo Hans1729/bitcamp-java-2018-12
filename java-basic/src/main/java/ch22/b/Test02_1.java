@@ -1,28 +1,38 @@
-// 바이너리 데이터 입출력 - FileInputStream 클래스 사용법
+// 바이너리 데이터 입출력 - FileOutputStream - 배열 단위로 출력하기
+// 
 package ch22.b;
 
 import java.io.FileOutputStream;
 
 public class Test02_1 {
- // 배열 단위로 출력하기
   public static void main(String[] args) {
-     // 배열 값 출력
+    // 배열 단위로 출력하기
     try {
+      // 주의!
+      // => 기존의 파일을 덮어쓴다.
       FileOutputStream out = new FileOutputStream("data.bin");
-      byte[] bytes = { 0x11, 0x22 , 0x33, 0x44, 0x55, 0x66};
+
+      byte[] bytes = {0x11, 0x22, 0x33, 0x44, 0x55, 0x66};
       
-      // write(byte[] : 배열 전체의 값을 출력한다) 
-        // write(byte[] , 첫번째 ,마지막 값을 출력한다) 
+      // write(byte[]) : 배열의 값 전체를 출력한다.
+      // write(byte[], 시작인덱스, 출력개수) : 시작 위치부터 지정된 개수를 출력한다.
+      //
       out.write(bytes); // 배열 전체를 출력한다.
-       
+      
       out.close();
-      // 2) 데이터를 출력한다.
-      // => write(int) : 1바이트를 출력한다.
-  
-  }catch(Exception e)
-  {
+      
+    } catch (Exception e) {
       e.printStackTrace();
-    }System.out.println("출력 완료!");
+    }
+    
+    System.out.println("출력 완료!");
+  }
+}
 
 
-}}
+
+
+
+
+
+

@@ -38,10 +38,10 @@ public class Test04 {
         //    => NullPointerException 발생
         // 2) 숫자 대신 문자열 입력 
         //    => 예) 값1? ok
-       //    => NumberFormatException
+        //    => NumberFormatException
         // 3) 0으로 나누기
         //    => 예) 값2? 0
-      //    => ArithmeticException
+        //    => ArithmeticException
         //
         
         // catch 블록을 배치할 때 구멍 큰 그물부터 배치하라.
@@ -52,8 +52,8 @@ public class Test04 {
         //
       } catch (NumberFormatException e) {
         System.out.println("정수 값을 입력하세요!");
-      } catch (RuntimeException e) { // OK! 공통 부모이기 때문에 가능!
         
+      } catch (RuntimeException e) { // OK! 공통 부모이기 때문에 가능!
         System.out.println("명령어 처리 중 오류 발생!");
         System.out.println(e.toString());
       }        

@@ -13,7 +13,6 @@ public class Test09 {
     // 하위 파일이나 디렉토리의 상세 정보 알아내기
     File[] files = file.listFiles();
     
-    
     for (File f : files) {
       System.out.printf("%s %12d %s\n", 
           f.isDirectory() ? "d" : "-",

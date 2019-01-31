@@ -1,18 +1,12 @@
 package design_pattern.composite;
 
-public interface Node {
+public abstract class Node {
   protected String title;
-    
   
-  
-  public String getTitle() { 
-    return this.title();
-
+  public String getTitle() {
+    return this.title;
   }
   
-  public abstract void getFileinfo() {
-    
-  }
+  public abstract void getFileInfo();
   
-
 }

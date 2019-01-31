@@ -32,10 +32,9 @@ public class Test06 {
       System.out.println(list.get(2));
       System.out.println(list.get(3)); // 예외가 발생하면 catch 블록에서 예외를 받는다.
       
-    } catch (IndexOutOfBoundsException e) {
+    } catch (RuntimeException e) {
       // 여기서 예외를 처리했기 때문에 main() 호출자에게 따로 보고하지 않는다.
-      System.out.println("실행 중 오류 발생!");
-      
+      System.out.println("실행 중 오류 밸생!");
     }
     
     System.out.println("종료!");
