@@ -1,5 +1,5 @@
-// 데이터 주고 받기 - 서버 만들기
-package ch23.b;
+// 계산기 클라이언트 만들기
+package ch23.c;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,13 +7,28 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Server1 {
-
+/*
+ * 실행 예 - 클라이언트가 계산기 서버에 접속한 후
+ * 
+ * > 계산기 서버에 오신 걸 환영합니다! <== 서버의 응답 > 
+ * 계산식을 입력하세요! <== 서버의 응답
+ *  예) 23 + 7 <==서버의 응답
+ * 
+ * > 23 + 7 <== 사용자의 입력, '>' 문자는 클라이언트에서 출력한다. 
+ * 결과는 30입니다. <== 서버의 응답 > 23 ^ 7 <== 사용자의 입력. '>' 문자는
+ * 클라이언트에서 출력한다. ^ 연산자를 지원하지 않습니다. <== 서버의 응답 
+ * > ok + yes <== 사용자의 입력 식의 형식이 잘못되었습니다. 
+ *   <== 서버의 응답 >
+ * quit <== 사용자의 입력. '>' 문자는 클라이언트에서 출력한다.
+ *  안녕히 가세요! <== 서버의 응답
+ */
+public class CalculatorServer {
   public static void main(String[] args) {
     try (Scanner keyboard = new Scanner(System.in);
         ServerSocket serverSocket = new ServerSocket(8888)) {
       
-      System.out.println("클라이언트의 연결을 기다리고 있음.");
+      System.out.println("계산기 서버에 오신 걸 환영합니다!");
+      keyboard.nextLine();
       
       try (
         // 대기열에서 클라이언트를 한 개 꺼낸다.
@@ -28,17 +43,8 @@ public class Server1 {
         // => 입력 스트림 객체를 준비하기
         InputStream in = socket.getInputStream()) {
         
-        System.out.println("대기열에서 클라이언트 정보를 꺼내 소켓을 생성하였음.");
-        System.out.println("클라이언트와 통신할 입출력 스트림이 준비되었음.");
+        System.out.println("계산식을 입력하세요! \n 예) 23+7");
         
-        // Client1과 Server1의 통신 규칙에 따라 순서대로 입출력 해야 한다.
-        // 왜? 입출력은 blocking 모드로 작동하기 때문이다.
-        // 클라이언트와 서버 간의 데이터를 주고 받는 통신 규칙을 "프로토콜(protocol)"이라 한다.
-        // 에코(echo)는 클라이언트에서 한 줄의 문자열을 보낸다.
-        // 따라서 서버는 한 줄의 문자열을 읽은 후에 응답해야 한다.
-        
-        // 서버에서 한 줄의 데이터를 읽기 전에는 클라이언트의 write()가 리턴하지 않음을 
-        // 확인하기 위해 클라이언트가 보낸 데이터를 읽지 않도록 잠시 실행을 중단한다.
         System.out.print("데이터를 읽기 전에 잠깐!");
         keyboard.nextLine(); // 사용자가 콘솔창에서 엔터를 칠 때까지 리턴하지 않는다.
         
@@ -66,3 +72,4 @@ public class Server1 {
   }
 
 }
+
