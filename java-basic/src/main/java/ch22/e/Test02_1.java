@@ -1,4 +1,4 @@
-// 인스턴스 출력하기
+// 인스턴스 출력하기 - 배열 활용
 package ch22.e;
 
 import java.io.BufferedOutputStream;
@@ -8,31 +8,42 @@ import java.io.FileOutputStream;
 public class Test02_1 {
 
   public static void main(String[] args) {
-    Score[]  students = { new Score("홍길동", 100, 100, 100),
-    new Score("임꺽정", 90, 90, 90),
-    new Score("유관순", 80, 80, 80)};
-
-    // 다음 3 학생의 성적 정보를 Score.data에 바이너리 형식으로 저장하라
-    // => java.io.BufferedOutputStream 클래스를 사용하라 .
-    // => java.io.DataputStream을 사용하라
-    try (FileOutputStream out = new FileOutputStream("Score.data");
-        // 버퍼 단위로 읽는 데코레이터를 붙인다 => 읽기 속도가 빠르다.
-        BufferedOutputStream out1 = new BufferedOutputStream(out);
-        // primitive type 데이터를 리턴하는 데코레이터를 붙인다. => 코딩이 간결해진다.
-        DataOutputStream out2 = new DataOutputStream(out1)) {
+    
+    // 다음 세 학생의 성적 정보를 score.data 파일에 바이너리 형식으로 저장하라!
+    // => java.io.BufferedOutputStream 클래스를 사용하라.
+    // => java.io.DataOutputStream 클래스를 사용하라.
+    //
+    Score[] students = {    
+        new Score("홍길동", 100, 100, 100),
+        new Score("임꺽정", 90, 90, 90),
+        new Score("유관순", 80, 80, 80)
+    };
+    
+    try (DataOutputStream out = new DataOutputStream(
+          new BufferedOutputStream(
+          new FileOutputStream("score.data")))) {
       
-           for(int i= 0; i< students.length; i++) {
-             out2.writeUTF(students[i].getName());
-             out2.writeUTF(students[i].getName());
-           }
-
-
+      out.writeInt(students.length);
+      
+      for (Score s : students) {
+        out.writeUTF(s.getName());
+        out.writeInt(s.getKor());
+        out.writeInt(s.getEng());
+        out.writeInt(s.getMath());
+      }
+      
+      out.flush();
+      
     } catch (Exception e) {
-
+      e.printStackTrace();
     }
-    System.out.println("출력완료!");
+    System.out.println("출력 완료!");
   }
 
-
 }
+
+
+
+
+
 

@@ -43,7 +43,7 @@ public class Test03_2 {
     for (Score s : students) {
       System.out.printf("%s, %d, %d, %d, %d, %.1f\n", 
         s.getName(), s.getKor(), s.getEng(), s.getMath(),
-        s.getSum(), s.getAveg());
+        s.getSum(), s.getAver());
     }
   }
 
