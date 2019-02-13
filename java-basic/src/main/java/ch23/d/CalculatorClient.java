@@ -21,9 +21,9 @@ Stateless 통신 방법
  */
 public class CalculatorClient {
   public static void main(String[] args) {
-    
+
     Scanner keyboard = new Scanner(System.in);
-    
+
     while (true) {
       System.out.print("> ");
       String input = keyboard.nextLine();
