@@ -49,7 +49,7 @@ public class ServerApp {
     serviceMap.put("/member/", new MemberService(memberDao));
     serviceMap.put("/lesson/", new LessonService(lessonDao));
     
-    Set<String> keySet = serviceMap.keySet();
+    Set<String> keySet = serviceMap.keySet(); // = keyboard
     
     try (ServerSocket serverSocket = new ServerSocket(8888)) {
       System.out.println("서버 시작!");
@@ -63,17 +63,11 @@ public class ServerApp {
           
           String request = in.readUTF();
           System.out.println(request);
-          
-          if (request.equals("quit")) {
-            quit(in, out);
-            out.flush();
-            continue;
-          }
-          
+
           String serviceName = null;
           for (String key : keySet) {
             if (request.startsWith(key)) {
-              serviceName = key;
+              serviceName = key; // ex) "/board/add"
               break;
             }
           }
@@ -98,29 +92,7 @@ public class ServerApp {
     }
   }
   
-  static void quit(ObjectInputStream in, ObjectOutputStream out) throws Exception {
-    try {
-      boardDao.saveData();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      //e.printStackTrace();
-    }
-    
-    try {
-      memberDao.saveData();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      //e.printStackTrace();
-    }
-    
-    try {
-      lessonDao.saveData();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      //e.printStackTrace();
-    }
-    out.writeUTF("종료함!");
-  }
+  
 }
 
 

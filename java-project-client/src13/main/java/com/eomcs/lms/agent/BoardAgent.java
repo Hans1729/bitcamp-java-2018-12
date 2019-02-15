@@ -8,9 +8,9 @@ import com.eomcs.lms.domain.Board;
 
 public class BoardAgent {
   
-  String serverAddr;
+  String serverAddr; 
   int port;
-  String rootPath;
+  String rootPath; // (board,lesson,member)
   
   public BoardAgent(String serverAddr, int port, String rootPath) {
     this.serverAddr = serverAddr;
@@ -46,6 +46,7 @@ public class BoardAgent {
         ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
       out.writeUTF(rootPath + "/add"); 
       out.flush();
+      
       if (!in.readUTF().equals("OK"))
         throw new Exception("서버에서 해당 명령어를 처리하지 못합니다.");
       

@@ -10,9 +10,12 @@ public class BoardDao extends AbstractDao<Board> {
     this.filepath = filepath;
   }
   
-  public void insert(Board board) {
+  public void insert(Board board) throws Exception{
     list.add(board);
+    
+      this.saveData();
   }
+ 
 
   public List<Board> findAll() {
     return list;
@@ -27,11 +30,12 @@ public class BoardDao extends AbstractDao<Board> {
     return null;
   }
 
-  public int update(Board board) {
+  public int update(Board board) throws Exception{
     int index = 0;
     for (Board obj : list) {
       if (obj.getNo() == board.getNo()) {
         list.set(index, board);
+      this.saveData();
         return 1;
       }
       index++;
@@ -39,11 +43,12 @@ public class BoardDao extends AbstractDao<Board> {
     return 0;
   }
 
-  public int delete(int no) {
+  public int delete(int no) throws Exception{
     int index = 0;
     for (Board obj : list) {
       if (obj.getNo() == no) {
         list.remove(index);
+        this.saveData();
         return 1;
       }
       index++;
