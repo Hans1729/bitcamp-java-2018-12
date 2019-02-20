@@ -1,14 +1,15 @@
 package com.eomcs.lms.handler;
 import java.util.Scanner;
-import com.eomcs.lms.agent.MemberAgent;
+import com.eomcs.lms.dao.MemberDao;
 
 public class MemberDeleteCommand implements Command {
-  MemberAgent memberAgent;
-  Scanner keyboard;
   
-  public MemberDeleteCommand(Scanner keyboard, MemberAgent memberAgent) {
+  Scanner keyboard;
+  MemberDao memberDao;
+  
+  public MemberDeleteCommand(Scanner keyboard, MemberDao memberDao) {
     this.keyboard = keyboard;
-    this.memberAgent = memberAgent;
+    this.memberDao = memberDao;
   }
   
   @Override
@@ -17,7 +18,7 @@ public class MemberDeleteCommand implements Command {
     int no = Integer.parseInt(keyboard.nextLine());
     
     try {
-      memberAgent.delete(no);
+      memberDao.delete(no);
       System.out.println("삭제했습니다.");
       
     } catch (Exception e) {

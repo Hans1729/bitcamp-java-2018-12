@@ -1,17 +1,17 @@
 package com.eomcs.lms.handler;
 import java.sql.Date;
 import java.util.Scanner;
-import com.eomcs.lms.agent.BoardAgent;
+import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 
 public class BoardAddCommand implements Command {
   
   Scanner keyboard;
-  BoardAgent boardAgent;
+  BoardDao boardDao; // 서버의 BoardDaoImpl 객체를 대행하는 프록시 객체이다.
   
-  public BoardAddCommand(Scanner keyboard, BoardAgent boardAgent) {
+  public BoardAddCommand(Scanner keyboard, BoardDao boardDao) {
     this.keyboard = keyboard;
-    this.boardAgent = boardAgent;
+    this.boardDao = boardDao;
   }
   
   @Override
@@ -29,7 +29,7 @@ public class BoardAddCommand implements Command {
     board.setViewCount(0);
     
     try {
-      boardAgent.add(board);
+      boardDao.insert(board);
       System.out.println("저장하였습니다.");
       
     } catch (Exception e) {
