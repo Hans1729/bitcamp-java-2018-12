@@ -1,4 +1,4 @@
-package com.eomcs.lms.dao;
+package com.eomcs.lms.dao.mariadb;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

@@ -1,5 +1,10 @@
-// 15단계: 여러 클라이언트 요청을 처리할 때의 문제점과 해결책(멀티 스레드 적용)
+// 17단계: Connection 객체 공유하기
+// => DAO에서 SQL 을 실행할 때마다 Connection 객체를 생성하는데,
+//    실행 속도도 높이고 커넥션 객체가 가비지가 되는 것도 줄이기 위해 
+//    커넥션 객체를 생성하여 공유한다.
 package com.eomcs.lms;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -32,25 +37,29 @@ public class App {
   Stack<String> commandHistory = new Stack<>();
   Queue<String> commandHistory2 = new LinkedList<>();
 
-  public void service() {
+  public void service() throws Exception{
 
+    // DAO가 사용할 커넥션 객체를 여기서 준비한다.
+    Connection con = DriverManager.getConnection(  
+        "jdbc:mariadb://localhost/bitcampdb?user=bitcamp&password=1111");
+        
     Map<String,Command> commandMap = new HashMap<>();
 
-    LessonDaoImpl lessonDao = new LessonDaoImpl("192.168.0.31", 8888, "/lesson");
+    LessonDaoImpl lessonDao = new LessonDaoImpl(con);
     commandMap.put("/lesson/add", new LessonAddCommand(keyboard, lessonDao));
     commandMap.put("/lesson/list", new LessonListCommand(keyboard, lessonDao));
     commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard, lessonDao));
     commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard, lessonDao));
     commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard, lessonDao));
 
-    MemberDaoImpl memberDao = new MemberDaoImpl("192.168.0.31", 8888, "/member");
+    MemberDaoImpl memberDao = new MemberDaoImpl(con);
     commandMap.put("/member/add", new MemberAddCommand(keyboard, memberDao));
     commandMap.put("/member/list", new MemberListCommand(keyboard, memberDao));
     commandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberDao));
     commandMap.put("/member/update", new MemberUpdateCommand(keyboard, memberDao));
     commandMap.put("/member/delete", new MemberDeleteCommand(keyboard, memberDao));
 
-    BoardDaoImpl boardDao = new BoardDaoImpl("192.168.0.31", 8888, "/board");
+    BoardDaoImpl boardDao = new BoardDaoImpl(con);
     commandMap.put("/board/add", new BoardAddCommand(keyboard, boardDao));
     commandMap.put("/board/list", new BoardListCommand(keyboard, boardDao));
     commandMap.put("/board/detail", new BoardDetailCommand(keyboard, boardDao));
@@ -95,7 +104,7 @@ public class App {
         System.out.println("명령어 실행 중 오류 발생 : " + e.toString());
       }
     }
-    
+    con.close();
     keyboard.close();
   }
   
@@ -122,7 +131,7 @@ public class App {
     return keyboard.nextLine().toLowerCase();
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception{
     App app = new App();
 
     // App 을 실행한다.
