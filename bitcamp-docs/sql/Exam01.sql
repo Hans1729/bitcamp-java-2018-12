@@ -85,7 +85,6 @@ DB 객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경, 삭제하는
     name varchar(20) default 'noname',
     age int default 20
   );
-
 > insert into test1(no, name, age) values(1, 'aaa', 30);
 
 값을 입력하지 않는 컬럼은 이름과 값 지정을 생략한다.
@@ -129,6 +128,7 @@ DB 객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경, 삭제하는
 > insert into test1(c3) values(3.14159); /* 2자리를 초과한 값은 반올림. */
 > insert into test1(c3) values(3.14551); /* 2자리를 초과한 값은 반올림. */
 > insert into test1(c4) values(1234567890); 
+> insert into test1(c4) values(1234); 
 > insert into test1(c4) values(12.34567890); /* 소수점은 반올림 처리됨 */
 > insert into test1(c4) values(12345678.90); /* 소수점은 반올림 처리됨 */
 
