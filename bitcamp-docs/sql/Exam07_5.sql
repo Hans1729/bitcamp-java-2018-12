@@ -19,6 +19,7 @@ from memb cross join stnt;
          컬럼명 앞에 테이블명을 명시하여 구분하라!*/ 
 select memb.mno, name, stnt.mno, work, bank
 from memb cross join stnt;
+
 /* 예전 문법 */
 select memb.mno, name, stnt.mno, work, bank
 from memb, stnt;

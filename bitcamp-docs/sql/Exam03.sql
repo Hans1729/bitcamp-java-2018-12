@@ -30,7 +30,7 @@ insert into test1(name,class,working) values('ooo','java101','N');
 select * from 테이블;
 select * from test1;
 
-/* 특정 컬럼의 값만 조회할 때*/
+/* 특정 컬럼의 값만 조회할 때 => '프로젝션(projection)' 이라 부른다.'*/
 select 컬럼명,컬럼명 from 테이블;
 select no, name, tel from test1;
 
@@ -53,13 +53,14 @@ from test1;
 
 /* as를 생략해도 된다.*/
 select 
-    no as num, 
+    no  num, 
     concat(name,'(',class,')') title 
 from test1; 
 ``` 
 
 ### 조회할 때 조건 지정하기
 - where 절과 연산자를 이용하여 조회 조건을 지정할 수 있다.
+- 이렇게 조건을 지정하여 결과를 선택하는 것을 "셀렉션(selection)" 이라 한다.
 
 ```
 select ... from ... where 조건...
@@ -78,7 +79,7 @@ where no > 5;
 select * from test1;
 
 /* 재직자 또는 java100기 학생만 조회하라!*/
-select no, name
+select no, name, class, working
 from test1
 where working='Y' or class='java100';
 
@@ -88,11 +89,11 @@ from test1
 where working='Y' and class='java100';
 
 /* 재직자가 아닌 사람만 조회하라!*/
-select no, name
+select no, name,
 from test1
 where not working = 'Y';
 
-select no, name
+select no, name, class , working
 from test1
 where working != 'Y';
 
@@ -106,7 +107,7 @@ update test1 set
 where (no % 2) = 0;
 
 /* 학생 번호가 3의 배수인 경우 전화번호를 '2222'로 변경하라*/
-update test16 set
+update test1 set
   tel = '2222'
 where (no % 3) = 0;
 
@@ -172,7 +173,9 @@ insert into test1(name,class,working) values('s011', 'iotjava5', '1');
 insert into test1(name,class,working) values('s012', 'iotjava5', '1');
 insert into test1(name,class,working) values('s013', 'iotjava5', '1');
 
-/* class 이름이 java로 시작하는 모든 학생 조회하기 */
+/* class 이름이 java로 시작하는 모든 학생 조회하기
+   => % : 0개 이상의 문자 
+ */
 select *
 from test1
 where class like 'java%';
@@ -280,7 +283,7 @@ select date_format(now(), '%M/%d/%y'); /* September/07/17 */
 select date_format(now(), '%W %w %a'); /* Thursday 4 Thu */
 select date_format(now(), '%M %b'); /* September Sep */
 select date_format(now(), '%p %h %H %l'); /* PM 01 13 1 */
-select date_format(now(), '%i %s'); /* 05 45 */
+select date_format(now(), '%i %s'); /* 05 45 분 / 초*/
 
 /* 문자열을 날짜 값으로 바꾸기 */
 select str_to_date('11/22/2017', '%m/%d/%Y');
