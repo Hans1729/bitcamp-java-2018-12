@@ -1,5 +1,4 @@
-// 2단계: '규칙2'에 맞춰 사용자의 입력을 서버에 전달한다.
-// 
+
 package com.eomcs.lms;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
