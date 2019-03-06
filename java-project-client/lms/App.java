@@ -8,22 +8,22 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
-import com.eomcs.lms.handler.BoardAddCommand;
-import com.eomcs.lms.handler.BoardDeleteCommand;
-import com.eomcs.lms.handler.BoardDetailCommand;
-import com.eomcs.lms.handler.BoardListCommand;
-import com.eomcs.lms.handler.BoardUpdateCommand;
-import com.eomcs.lms.handler.Command;
-import com.eomcs.lms.handler.LessonAddCommand;
-import com.eomcs.lms.handler.LessonDeleteCommand;
-import com.eomcs.lms.handler.LessonDetailCommand;
-import com.eomcs.lms.handler.LessonListCommand;
-import com.eomcs.lms.handler.LessonUpdateCommand;
-import com.eomcs.lms.handler.MemberAddCommand;
-import com.eomcs.lms.handler.MemberDeleteCommand;
-import com.eomcs.lms.handler.MemberDetailCommand;
-import com.eomcs.lms.handler.MemberListCommand;
-import com.eomcs.lms.handler.MemberUpdateCommand;
+import lms.handler.BoardAddCommand;
+import lms.handler.BoardDeleteCommand;
+import lms.handler.BoardDetailCommand;
+import lms.handler.BoardListCommand;
+import lms.handler.BoardUpdateCommand;
+import lms.handler.Command;
+import lms.handler.LessonAddCommand;
+import lms.handler.LessonDeleteCommand;
+import lms.handler.LessonDetailCommand;
+import lms.handler.LessonListCommand;
+import lms.handler.LessonUpdateCommand;
+import lms.handler.MemberAddCommand;
+import lms.handler.MemberDeleteCommand;
+import lms.handler.MemberDetailCommand;
+import lms.handler.MemberListCommand;
+import lms.handler.MemberUpdateCommand;
 
 public class App {
 

@@ -6,7 +6,7 @@ CREATE table x_board (
   board_id int not null primary key auto_increment,
   title varchar(255),
   contents text null,
-  created_date datetime null,
+  created_date datetime,
   view_count int null default 0
 );
 

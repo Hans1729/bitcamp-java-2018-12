@@ -21,12 +21,37 @@
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="output" path="bin/default"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.5.0/e11d2e1b4da8367d6805a55fc2471bf2ced339f4/mybatis-3.5.0-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.5.0/2db32dc396b5e7f385d71e6e212c3134283f2264/mybatis-3.5.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.7/ba949cc0e7624718c2ace165fd362f54f36eebd7/httpclient-4.5.7-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.7/dda059f4908e1b548b7ba68d81a3b05897f27cb0/httpclient-4.5.7.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.4.0/80dfa28a6c0c5e91d41ea12141792ef55377afd9/mariadb-java-client-2.4.0-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.4.0/87f88656d9cf5381fc3c11c8e52d42f9eb23247c/mariadb-java-client-2.4.0.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/26.0-jre/2e35b51c759ae1a6edbb967b65c525105536d382/guava-26.0-jre-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/26.0-jre/6a806eff209f36f635f943e16d97491f00f6bfab/guava-26.0-jre.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.11/95167d269607b358ba3ed7030ccd336dad8591a0/httpcore-4.4.11-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.11/de748cf874e4e193b42eceea9fe5574fabb9d4df/httpcore-4.4.11.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.11/bce4ba84fd527950e35040b20a991c63e90e2850/commons-codec-1.11-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.11/3acb4705652e16236558f0f4f2192cc33c3bd189/commons-codec-1.11.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
