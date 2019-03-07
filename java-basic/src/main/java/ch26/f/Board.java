@@ -1,4 +1,4 @@
-package ch26.e;
+package ch26.f;
 
 import java.sql.Date;
 
@@ -46,4 +46,6 @@ public class Board {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  
+  
 }
