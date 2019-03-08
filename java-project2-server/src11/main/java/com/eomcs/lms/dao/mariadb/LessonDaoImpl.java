@@ -14,8 +14,8 @@ public class LessonDaoImpl implements LessonDao {
 
   public List<Lesson> findAll() {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select lesson_id, titl, sdt, edt, tot_hr from lms_lesson"
         + " order by lesson_id desc")) {
       
@@ -41,8 +41,8 @@ public class LessonDaoImpl implements LessonDao {
 
   public void insert(Lesson lesson) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "insert into lms_lesson(titl,conts,sdt,edt,tot_hr,day_hr)"
         + " values(?,?,?,?,?,?)")) {
       
@@ -62,8 +62,8 @@ public class LessonDaoImpl implements LessonDao {
 
   public Lesson findByNo(int no) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select lesson_id, titl, conts, sdt, edt, tot_hr, day_hr"
         + " from lms_lesson"
         + " where lesson_id = ?")) {
@@ -94,8 +94,8 @@ public class LessonDaoImpl implements LessonDao {
 
   public int update(Lesson lesson) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "update lms_lesson set"
         + " titl = ?,"
         + " conts = ?,"
@@ -121,8 +121,8 @@ public class LessonDaoImpl implements LessonDao {
 
   public int delete(int no) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "delete from lms_lesson where lesson_id = ?")) {
       
       stmt.setInt(1, no);

@@ -24,6 +24,7 @@ import com.eomcs.lms.handler.MemberAddCommand;
 import com.eomcs.lms.handler.MemberDeleteCommand;
 import com.eomcs.lms.handler.MemberDetailCommand;
 import com.eomcs.lms.handler.MemberListCommand;
+import com.eomcs.lms.handler.MemberSearchCommand;
 import com.eomcs.lms.handler.MemberUpdateCommand;
 import com.eomcs.lms.handler.PhotoBoardAddCommand;
 import com.eomcs.lms.handler.PhotoBoardDeleteCommand;
@@ -48,21 +49,21 @@ public class ApplicationInitializer implements ApplicationContextListener {
       LessonDaoImpl lessonDao = new LessonDaoImpl(con);
       MemberDaoImpl memberDao = new MemberDaoImpl(con);
       BoardDaoImpl boardDao = new BoardDaoImpl(con);
-      PhotoBoardDaoImpl photoBoardImpl = new PhotoBoardDaoImpl(con);
-      PhotoFileDaoImpl photoFileImpl = new PhotoFileDaoImpl(con);
+      PhotoBoardDaoImpl photoBoardDao = new PhotoBoardDaoImpl(con);
+      PhotoFileDaoImpl photoFileDao = new PhotoFileDaoImpl(con);
       
       context.put("/lesson/add", new LessonAddCommand(lessonDao));
       context.put("/lesson/list", new LessonListCommand(lessonDao));
       context.put("/lesson/detail", new LessonDetailCommand(lessonDao));
       context.put("/lesson/update", new LessonUpdateCommand(lessonDao));
       context.put("/lesson/delete", new LessonDeleteCommand(lessonDao));
-
       
       context.put("/member/add", new MemberAddCommand(memberDao));
       context.put("/member/list", new MemberListCommand(memberDao));
       context.put("/member/detail", new MemberDetailCommand(memberDao));
       context.put("/member/update", new MemberUpdateCommand(memberDao));
       context.put("/member/delete", new MemberDeleteCommand(memberDao));
+      context.put("/member/search", new MemberSearchCommand(memberDao));
       
       context.put("/board/add", new BoardAddCommand(boardDao));
       context.put("/board/list", new BoardListCommand(boardDao));
@@ -70,11 +71,15 @@ public class ApplicationInitializer implements ApplicationContextListener {
       context.put("/board/update", new BoardUpdateCommand(boardDao));
       context.put("/board/delete", new BoardDeleteCommand(boardDao));
       
-      context.put("/photoboard/add", new PhotoBoardAddCommand(photoBoardImpl,photoFileImpl));
-      context.put("/photoboard/list", new PhotoBoardListCommand(photoBoardImpl));
-      context.put("/photoboard/detail", new PhotoBoardDetailCommand(photoBoardImpl,photoFileImpl));
-      context.put("/photoboard/update", new PhotoBoardUpdateCommand(photoBoardImpl,photoFileImpl));
-      context.put("/photoboard/delete", new PhotoBoardDeleteCommand(photoBoardImpl,photoFileImpl));
+      context.put("/photoboard/add", 
+          new PhotoBoardAddCommand(photoBoardDao, photoFileDao));
+      context.put("/photoboard/list", new PhotoBoardListCommand(photoBoardDao));
+      context.put("/photoboard/detail", 
+          new PhotoBoardDetailCommand(photoBoardDao, photoFileDao));
+      context.put("/photoboard/update", 
+          new PhotoBoardUpdateCommand(photoBoardDao, photoFileDao));
+      context.put("/photoboard/delete", 
+          new PhotoBoardDeleteCommand(photoBoardDao, photoFileDao));
       
     } catch (Exception e) {
       throw new ApplicationContextException(e);

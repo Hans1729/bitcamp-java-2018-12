@@ -11,16 +11,19 @@ import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.util.DataSource;
 
 public class PhotoBoardDaoImpl implements PhotoBoardDao {
-DataSource dataSource;
 
-  public  PhotoBoardDaoImpl(DataSource dataSource) {
-    this.dataSource =dataSource ;
+  // DataSource 의존 객체 선언
+  DataSource dataSource;
+  
+  public PhotoBoardDaoImpl(DataSource dataSource) {
+    this.dataSource = dataSource;
   }
+  
   @Override
   public List<PhotoBoard> findAll() {
     Connection con = dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select photo_id, titl, cdt, vw_cnt, lesson_id from lms_photo"
             + " order by photo_id desc")) {
 
@@ -47,8 +50,8 @@ DataSource dataSource;
   @Override
   public void insert(PhotoBoard photoBoard) {
     Connection con = dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "insert into lms_photo(titl,lesson_id) values(?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
 
@@ -69,7 +72,8 @@ DataSource dataSource;
   @Override
   public PhotoBoard findByNo(int no) {
     Connection con = dataSource.getConnection();
-    try{
+    
+    try {
       // 조회수 증가시키기
       try (PreparedStatement stmt = con.prepareStatement(
           "update lms_photo set vw_cnt = vw_cnt + 1 where photo_id = ?")) {
@@ -107,8 +111,8 @@ DataSource dataSource;
   @Override
   public int update(PhotoBoard photoBoard) {
     Connection con = dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "update lms_photo set titl = ? where photo_id = ?")) {
 
       stmt.setString(1, photoBoard.getTitle());
@@ -123,8 +127,8 @@ DataSource dataSource;
   @Override
   public int delete(int no) {
     Connection con = dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "delete from lms_photo where photo_id = ?")) {
 
       stmt.setInt(1, no);

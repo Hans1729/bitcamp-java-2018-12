@@ -16,10 +16,9 @@ public class LessonDetailCommand implements Command {
   @Override
   public void execute(BufferedReader in, PrintWriter out) {
     try {
-    out.println("번호? ");
-    out.println("!{}!");
-    out.flush();
-    int no = Integer.parseInt(in.readLine());
+      out.println("번호?\n!{}!");
+      out.flush();
+      int no = Integer.parseInt(in.readLine());
 
       Lesson lesson = lessonDao.findByNo(no);
       if (lesson == null) {

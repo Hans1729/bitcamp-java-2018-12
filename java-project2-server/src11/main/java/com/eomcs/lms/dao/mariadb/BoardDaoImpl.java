@@ -13,8 +13,8 @@ public class BoardDaoImpl implements BoardDao {
 
   public List<Board> findAll() {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select board_id, conts, cdt, vw_cnt from lms_board"
             + " order by board_id desc")) {
 
@@ -39,8 +39,8 @@ public class BoardDaoImpl implements BoardDao {
 
   public void insert(Board board) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "insert into lms_board(conts) values(?)")) {
 
       stmt.setString(1, board.getContents());
@@ -52,6 +52,7 @@ public class BoardDaoImpl implements BoardDao {
 
   public Board findByNo(int no) {
     Connection con = ConnectionFactory.create();
+    
     try {
       // 조회수 증가시키기
       try (PreparedStatement stmt = con.prepareStatement(
@@ -86,8 +87,8 @@ public class BoardDaoImpl implements BoardDao {
 
   public int update(Board board) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "update lms_board set conts = ? where board_id = ?")) {
 
       stmt.setString(1, board.getContents());
@@ -101,8 +102,8 @@ public class BoardDaoImpl implements BoardDao {
 
   public int delete(int no) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "delete from lms_board where board_id = ?")) {
 
       stmt.setInt(1, no);

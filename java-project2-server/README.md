@@ -1,76 +1,304 @@
-# eomcs-java-project-31
+# eomcs-java-project-4.7-server
 
-`Observer` 디자인 패턴의 활용
+트랜잭션이 필요한 이유!
 
-- 특정 상태에서 수행되는 코드를 캡슐화하여 분리하는 방법
-- `Observer` 디자인 패턴의 용도와 이점을 이해하기
+- 여러 개의 DB 변경 작업을 한 작업 단위로 묶는 방법
+- `commit`과 `rollback`의 의미
 
-  
 ## 프로젝트 - 수업관리 시스템  
 
-### 과제 1: 애플리케이션 시작하거나 종료할 때 실행될 코드를 `Observer` 디자인 패턴을 적용하여 분리하라.
+### ver 4.7.0 - `수업 사진 게시판`을 만들라.
 
-- ApplicationContextListener.java (ApplicationContextListener.java.01)
-    - Observer가 갖춰야 할 규칙을 정의한다.
-    - 애플리케이션이 시작할 때 자동으로 호출할 메서드의 규칙을 정의한다.
-    - 애플리케이션을 종료하기 전에 자동으로 호출할 메서드의 규칙을 정의한다.
-- DataLoaderListener.java (DataLoaderListener.java.01)
-    - `ApplicationContextListener`를 구현한다. 즉 `Observer`를 만든다.
-    - `App` 클래스에 있는 파일 입출력 코드를 이 클래스로 옮긴다.
-    - 애플리케이션이 시작될 때 파일로부터 데이터를 읽는다.
-    - 애플리케이션이 종료될 때 파일로 데이터를 쓴다.
-- App.java (App.java.01)
-    - `Observer` 디자인 패턴을 적용하기 전에 코드를 먼저 정리한다.
-    - 기존의 스태틱 멤버를 인스턴스 멤버로 전환한다.
-    - main()에 작성된 코드를 인스턴스 메서드로 분리하여 정리한다.
-    - `Observer(예: ApplicationContextListener)`를 등록할 `addApplicationContextListener()`를 추가한다.
-
-#### 실행 결과
-
-`App`의 실행해도 이전에 저장한 데이터가 출력되지 않는다.
-```
-데이터를 읽어옵니다.
-명령> /board/list
-
-명령> /board/add
-번호? 100
-내용? test..
-저장하였습니다.
-
-명령> /board/list
-100, test..              , 2018-11-09, 0
-
-명령> quit
-안녕!
-데이터를 저장합니다.
-```
-
-종료한 후에 다시 실행해도 이전에 추가한 데이터가 출력되지 않는다.
-```
-데이터를 읽어옵니다.
-명령> /board/list
-
-```
-
-이유는 DataLoaderListener에서 준비한 ArrayList와 LinkedList를 핸들러에서 사용하지 않기 때문이다. 다음 단계에서 처리한다.
-
-### 과제 2: DataLoaderListener에서 준비한 객체를 다른 객체와 공유하라.
-
-- ApplicationContextListener.java
-    - `App` 객체와의 값을 공유하기 위해 `contextInitialized()` 와 `contextDestroyed()`에 Map 파라미터를 추가한다.
+- PhotoBoard.java
+    - 사진 게시물의 데이터 타입을 정의한다.
+- PhotoBoardDao.java
+    - 사진 게시물의 CRUD 관련 메서드를 정의한다.
+- PhotoBoardListCommand.java
+    - 사진 게시물의 목록을 출력한다.
+- PhotoBoardDetailCommand.java
+    - 특정 사진 게시물의 상세 정보를 출력한다.
+- PhotoBoardAddCommand.java
+    - 사진 게시물을 등록한다.
+- PhotoBoardUpdateCommand.java
+    - 사진 게시물을 변경한다. 
+- PhotoBoardDeleteCommand.java
+    - 사진 게시물을 삭제한다. 
 - DataLoaderListener.java
-    - `ApplicationContextListener`의 변경에 따라 코드를 바꾼다.
-    - 파일에서 수업, 회원, 게시글 데이터를 읽어 들인 후 그 데이터가 보관된 컬렉션 객체를 Map에 공유한다. 
+    - `PhotoBoardDao` 객체를 생성하여 맵 객체에 보관한다.
 - App.java
-    - `Map` 객체를 통해 `Observer`와 `App` 사이에서 값을 공유한다.
-    - `DataLoaderListener`가 준비한 컬렉션 객체를 핸들러에 넘긴다.
+    - 사진 게시물 관련 `Command` 객체를 생성하여 커맨드 맵에 보관한다.
 
-#### 실행 결과
+### ver 4.7.1 - `수업 사진 게시판`에 사진 파일을 첨부하는 기능을 추가하라.
 
-이제 `App`의 실행 결과는 이전 버전과 같다. 애플리케이션을 실행하면 정상적으로 파일에서 데이터를 읽어오고, 종료하면 파일로 데이터를 출력할 것이다.
+- PhotoFile.java
+    - 사진 파일의 데이터 타입을 정의한다.
+- PhotoFileDao.java
+    - 사진 파일의 CRUD 관련 메서드를 정의한다.
+    - 단 사진 파일은 사진 게시물과 함께 사용되기에 변경,상세조회는 제외한다.
+- PhotoBoardDao.java
+    - 게시글을 등록한 후 자동 생성된 게시물 번호를 리턴하도록 코드를 변경한다.
+    - 이 게시글 등록 번호가 있어야만 사진 파일을 등록할 수 있다.
+- PhotoBoardAddCommand.java
+    - 사진 파일을 다룰 때 사용할 `PhotoFileDao` 객체를 생성자의 파라미터로 주입한다.
+    - 사진 게시물에 사진 파일을 첨부하는 기능을 추가한다.
+- PhotoBoardDetailCommand.java
+    - 사진 파일을 다룰 때 사용할 `PhotoFileDao` 객체를 생성자의 파라미터로 주입한다.
+    - 사진 게시물을 출력할 때 첨부된 사진 파일명도 함께 출력한다.
+- PhotoBoardUpdateCommand.java
+    - 사진 파일을 다룰 때 사용할 `PhotoFileDao` 객체를 생성자의 파라미터로 주입한다.
+    - 사진 게시물을 변경할 때 첨부할 사진을 변경한다.
+- PhotoBoardDeleteCommand.java
+    - 사진 파일을 다룰 때 사용할 `PhotoFileDao` 객체를 생성자의 파라미터로 주입한다.
+    - 사진 게시물을 삭제할 때 첨부한 사진 파일도 함께 삭제한다.
+- DataLoaderListener.java
+    - `PhotoFileDao` 객체를 생성하여 맵 객체에 보관한다.
+- App.java
+    - 사진 게시물 관련 `Command` 객체를 생성할 때 사진 데이터를 다룰 수 있는 `PhotoFileDao`객체를 주입한다.
+
+##### 실행 결과
+
+`eomcs-java-project-server` 프로젝트의 `App` 클래스를 실행한다.
+```
+DataLoaderListener.contextInitialized() 실행!
+MariaDB에 연결했습니다.
+서버 실행!
+...
+```
+
+`eomcs-java-project-client`프로젝트의 `ClientApp`을 실행한다.
+```
+명령> /photoboard/list
+  1, 수업 오리엔테이션           , 2018-11-14, 0, 1
+  2, 1차 과제 발표            , 2018-11-14, 0, 1
+  3, null                , 2018-11-14, 0, 2
+  4, 과제 발표회              , 2018-11-14, 0, 3
+  6, 발표2                 , 2018-11-14, 0, 1
+  7, okok2               , 2018-11-14, 0, 2
+  8, test1               , 2018-11-15, 0, 2
+
+명령> /photoboard/detail
+번호?
+7
+제목: okok2
+작성일: 2018-11-14
+조회수: 0
+수업: 2
+사진 파일:
+> aaa1.jpeg
+> aaa2.jpeg
+
+명령> /photoboard/update
+번호?
+7
+제목(okok2)?
+최종 발표
+사진 파일:
+> aaa1.jpeg
+> aaa2.jpeg
+
+사진은 일부만 변경할 수 없습니다.
+전체를 새로 등록해야 합니다.
+사진을 변경하시겠습니까?(y/N)
+y
+최소 한 개의 사진 파일을 등록해야 합니다.
+파일명 입력 없이 그냥 엔터를 치면 파일 추가를 마칩니다.
+사진 파일?
+
+최소 한 개의 사진 파일을 등록해야 합니다.
+사진 파일?
+ppt1.jpeg
+사진 파일?
+pp2.jpeg
+사진 파일?
+pp3.jpeg
+사진 파일?
+
+사진을 변경했습니다.
+
+명령> /photoboard/detail
+번호?
+7
+제목: 최종 발표
+작성일: 2018-11-14
+조회수: 0
+수업: 2
+사진 파일:
+> ppt1.jpeg
+> pp2.jpeg
+> pp3.jpeg
+
+명령> /photoboard/delete
+번호?
+99
+해당 사진을 찾을 수 없습니다.
+
+명령> /photoboard/delete
+번호?
+7
+사진을 삭제했습니다.
+
+명령> /photoboard/list
+  1, 수업 오리엔테이션           , 2018-11-14, 0, 1
+  2, 1차 과제 발표            , 2018-11-14, 0, 1
+  3, null                , 2018-11-14, 0, 2
+  4, 과제 발표회              , 2018-11-14, 0, 3
+  6, 발표2                 , 2018-11-14, 0, 1
+  8, test1               , 2018-11-15, 0, 2
+
+명령> 
+```
+
+### ver 4.7.2 - 사진 게시물과 첨부 파일을 한 단위로 묶어 등록/변경/삭제를 수행하라.
+
+사진 게시물을 등록하는 경우 게시물 기본 정보는 `PHOTO` 테이블에 입력하고 사진 파일 정보는 `PHO_FILE` 테이블에 입력한다. 최소 한 개의 사진은 반드시 첨부해야 하기 때문에 `PHO_FILE` 테이블에 사진 파일을 입력하다가 실패하면 `PHOTO` 테이블에 입력한 게시물은 취소해야 한다.
+
+#### 트랜잭션 적용 전 실행 결과
+
+파일 등록에 실행하는 상황을 만들기 위해 파일 이름을 255자 이상으로 지정한다.
+
+```
+명령> /photoboard/list
+  1, 수업 오리엔테이션           , 2018-11-14, 0, 1
+  2, 1차 과제 발표            , 2018-11-14, 0, 1
+  3, null                , 2018-11-14, 0, 2
+  4, 과제 발표회              , 2018-11-14, 0, 3
+  6, 발표2                 , 2018-11-14, 0, 1
+  8, test1               , 2018-11-15, 0, 2
+
+명령> /photoboard/add
+제목?
+ok
+수업?
+1
+최소 한 개의 사진 파일을 등록해야 합니다.
+파일명 입력 없이 그냥 엔터를 치면 파일 추가를 마칩니다.
+사진 파일?
+012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890
+사진 파일?
+
+java.sql.SQLDataException: (conn=11) Data too long for column 'PATH' at row 1 : (conn=11) Data too long for column 'PATH' at row 1
+```
+
+사진 파일을 입력하는데 실패했다. 그런데 사진 게시물 목록을 보면 게시물 기본 정보는 그대로 등록되었다.
+
+```
+명령> /photoboard/list
+  1, 수업 오리엔테이션           , 2018-11-14, 0, 1
+  2, 1차 과제 발표            , 2018-11-14, 0, 1
+  3, null                , 2018-11-14, 0, 2
+  4, 과제 발표회              , 2018-11-14, 0, 3
+  6, 발표2                 , 2018-11-14, 0, 1
+  8, test1               , 2018-11-15, 0, 2
+  9, ok                  , 2018-11-15, 0, 1
+
+명령> 
+```
+
+이를 해결하는 방법은 `게시물 기본 정보 입력` 과 `사진 파일 정보 입력`을 한 작업(트랜잭션)으로 묶어 실행하는 것이다.  
+
+#### 두 입력 작업을 한 작업(트랜잭션)으로 묶는 방법
+
+- 같은 커넥션을 사용한다.
+- `insert`/`update`/`delete`을 실행하기 전에 커넥션을 커밋 모드를 수동으로 변경한다.
+- 작업 완료 후 DBMS에 `commit` 요청을 보낸다.
+- 작업 실패한다면 DBMS에 `rollback` 요청을 보낸다.
+
+#### 작업 파일
+
+- DataLoaderListener.java
+    - `Command` 객체에서 DB 커넥션 객체를 사용하야 하기 때문에 `Connection` 객체를 스태틱 필드로 전환한다.
+- PhotoBoardAddCommand.java
+    - 두 번의 `insert` 작업을 한 트랜잭션으로 묶어 처리한다.
+
+#### 트랜잭션 적용 후 실행 결과
+
+```
+명령> /photoboard/list
+  1, 수업 오리엔테이션           , 2018-11-14, 0, 1
+  2, 1차 과제 발표            , 2018-11-14, 0, 1
+  3, null                , 2018-11-14, 0, 2
+  4, 과제 발표회              , 2018-11-14, 0, 3
+  6, 발표2                 , 2018-11-14, 0, 1
+  8, test1               , 2018-11-15, 0, 2
+  9, ok                  , 2018-11-15, 0, 1
+
+명령> /photoboard/add
+제목?
+ok2
+수업?
+1
+최소 한 개의 사진 파일을 등록해야 합니다.
+파일명 입력 없이 그냥 엔터를 치면 파일 추가를 마칩니다.
+사진 파일?
+012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890012345678900123456789001234567890
+사진 파일?
+
+java.sql.SQLDataException: (conn=12) Data too long for column 'PATH' at row 1 : (conn=12) Data too long for column 'PATH' at row 1
+```
+
+이전과 달리 트랜잭션을 적용한 후에는 사진 파일 등록에 실패했을 때 게시물 기본 정보 입력도 취소된 것을 확인할 수 있다.
+
+```
+명령> /photoboard/list
+  1, 수업 오리엔테이션           , 2018-11-14, 0, 1
+  2, 1차 과제 발표            , 2018-11-14, 0, 1
+  3, null                , 2018-11-14, 0, 2
+  4, 과제 발표회              , 2018-11-14, 0, 3
+  6, 발표2                 , 2018-11-14, 0, 1
+  8, test1               , 2018-11-15, 0, 2
+  9, ok                  , 2018-11-15, 0, 1
+
+명령> 
+```
+
+물론 사진 파일이 정상적으로 입력된다면 게시물 기본 정보도 정상적으로 입력된다.
+
+```
+명령> /photoboard/add
+제목?
+okokok
+수업?
+1
+최소 한 개의 사진 파일을 등록해야 합니다.
+파일명 입력 없이 그냥 엔터를 치면 파일 추가를 마칩니다.
+사진 파일?
+test.jpeg
+사진 파일?
+
+사진을 저장했습니다.
+
+명령> /photoboard/list
+  1, 수업 오리엔테이션           , 2018-11-14, 0, 1
+  2, 1차 과제 발표            , 2018-11-14, 0, 1
+  3, null                , 2018-11-14, 0, 2
+  4, 과제 발표회              , 2018-11-14, 0, 3
+  6, 발표2                 , 2018-11-14, 0, 1
+  8, test1               , 2018-11-15, 0, 2
+  9, ok                  , 2018-11-15, 0, 1
+ 11, okokok              , 2018-11-15, 0, 1
+
+명령> /photoboard/detail
+번호?
+11
+제목: okokok
+작성일: 2018-11-15
+조회수: 0
+수업: 1
+사진 파일:
+> test.jpeg
+
+```
+
+#### 사진 게시물 변경과 삭제에 대해서도 트랜잭션을 적용한다.
+
+- PhotoBoardUpdateCommand.java
+    - `update`, `insert` 작업을 한 트랜잭션으로 묶어 처리한다.
+- PhotoBoardDeleteCommand.java
+    - 두 번의 `delete` 작업을 한 트랜잭션으로 묶어 처리한다.
 
 ## 실습 소스
 
-- src/main/java/com/eomcs/context/ApplicationContextListener.java 추가
-- src/main/java/com/eomcs/lms/DataLoaderListener.java 추가
-- src/main/java/com/eomcs/lms/App.java 변경
+- src/main/java/com/eomcs/lms/handler/PhotoBoardAddCommand.java 변경
+- src/main/java/com/eomcs/lms/handler/PhotoBoardUpdateCommand.java 변경
+- src/main/java/com/eomcs/lms/handler/PhotoBoardDeleteCommand.java 변경
+- src/main/java/com/eomcs/lms/DataLoaderListener.java 변경

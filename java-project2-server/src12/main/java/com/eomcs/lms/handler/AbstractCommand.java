@@ -11,12 +11,9 @@ public abstract class AbstractCommand implements Command {
   
   @Override
   public void execute(BufferedReader in, PrintWriter out) {
-    // 클라이언트 요청을 처리한 후 커넥션을 자동으로 닫도록
-   // try-with-resurces 블록에 connnection 레퍼런스를 선언한다.
     try {
       execute(new Response(in, out));
-
-    }catch (Exception e) {
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }

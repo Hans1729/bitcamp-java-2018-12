@@ -22,6 +22,11 @@
 //    - 첨부파일 입력 추가
 // 4.3 ApplicationInitializer 변경
 //    - PhotoBoardUpdateCommand의 생성자에 PhotoFileDao 주입
+// 5) 사진 게시물 삭제할 때 첨부파일도 변경하기
+// 5.1 PhotoBoardDeleteCommand 변경
+//    - 첨부파일 삭제 추가
+// 5.2 ApplicationInitializer 변경
+//    - PhotoBoardDeleteCommand의 생성자에 PhotoFileDao 주입
 package com.eomcs.lms;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

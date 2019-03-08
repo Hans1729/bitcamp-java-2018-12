@@ -13,8 +13,9 @@ public abstract class AbstractCommand implements Command {
   
   @Override
   public void execute(BufferedReader in, PrintWriter out) {
-    // 클라이언트 요청을 처리한 후 커넥션을 자동으로 닫도록
-   // try-with-resurces 블록에 connnection 레퍼런스를 선언한다.
+    // 클라이언트 요청을 처리한 후 커넥션을 자동으로 닫도록 
+    // try-with-resources 블록에 Connection 레퍼런스를 선언한다.
+    //
     try (Connection con = ConnectionFactory.create()){
       execute(new Response(in, out));
       // 현재 스레드에 보관된 Connection 객체를 꺼낸다.
@@ -24,8 +25,9 @@ public abstract class AbstractCommand implements Command {
     } catch (Exception e) {
       try {
         ConnectionFactory.create().rollback();
-      }catch (Exception e2) {
+      } catch (Exception e2) {
         // rollback() 하다가 발생된 예외는 달리 처리할 방법이 없다.
+        // 예외가 발생하더라도 그냥 무시한다.
       }
       out.printf("실행 오류! : %s\n", e.getMessage());
     }

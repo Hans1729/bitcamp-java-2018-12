@@ -41,6 +41,38 @@ public class MemberDaoImpl implements MemberDao {
       throw new RuntimeException(e);
     }
   }
+  
+  @Override
+  public List<Member> findByKeyword(String keyword) {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select member_id, name, email, tel from lms_member"
+        + " where name like concat('%', ?, '%')"
+        + " or email like concat('%', ?, '%')"
+        + " or tel like concat('%', ?, '%')"
+        + " order by name asc")) {
+
+      stmt.setString(1, keyword);
+      stmt.setString(2, keyword);
+      stmt.setString(3, keyword);
+      
+      try (ResultSet rs = stmt.executeQuery()) {
+
+        ArrayList<Member> list = new ArrayList<>();
+        while (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("member_id"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setTel(rs.getString("tel"));
+
+          list.add(member);
+        }
+        return list;
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   public void insert(Member member) {
     try (PreparedStatement stmt = con.prepareStatement(

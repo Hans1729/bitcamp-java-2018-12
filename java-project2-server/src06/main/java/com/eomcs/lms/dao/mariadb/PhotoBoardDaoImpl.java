@@ -8,8 +8,7 @@ import java.util.List;
 import com.eomcs.lms.dao.PhotoBoardDao;
 import com.eomcs.lms.domain.PhotoBoard;
 
-public class PhotoBoardDaoImpl implements PhotoBoardDao{
-
+public class PhotoBoardDaoImpl implements PhotoBoardDao {
 
   // 외부에서 커넥션 객체를 주입 받는다.
   Connection con;
@@ -18,6 +17,7 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
     this.con = con;
   }
 
+  @Override
   public List<PhotoBoard> findAll() {
     try (PreparedStatement stmt = con.prepareStatement(
         "select photo_id, titl, cdt, vw_cnt, lesson_id from lms_photo"
@@ -43,18 +43,21 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
     }
   }
 
+  @Override
   public void insert(PhotoBoard photoBoard) {
     try (PreparedStatement stmt = con.prepareStatement(
-        "insert into lms_photo(titl,lesson_id) values(?, ?)")) {
+        "insert into lms_photo(titl,lesson_id) values(?,?)")) {
 
       stmt.setString(1, photoBoard.getTitle());
       stmt.setInt(2, photoBoard.getLessonNo());
       stmt.executeUpdate();
+      
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
+  @Override
   public PhotoBoard findByNo(int no) {
     try {
       // 조회수 증가시키기
@@ -65,7 +68,7 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
       }
 
       try (PreparedStatement stmt = con.prepareStatement(
-          "select photo_id, titl, cdt, vw_cnt, lesson_id from lms_photo "
+          "select photo_id, titl, cdt, vw_cnt, lesson_id from lms_photo"
           + " where photo_id = ?")) {
 
         stmt.setInt(1, no);
@@ -80,6 +83,7 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
             photoBoard.setViewCount(rs.getInt("vw_cnt"));
             photoBoard.setLessonNo(rs.getInt("lesson_id"));
             return photoBoard;
+            
           } else {
             return null;
           }
@@ -89,7 +93,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
       throw new RuntimeException(e);
     }
   }
-
+  
+  @Override
   public int update(PhotoBoard photoBoard) {
     try (PreparedStatement stmt = con.prepareStatement(
         "update lms_photo set titl = ? where photo_id = ?")) {
@@ -102,7 +107,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
       throw new RuntimeException(e);
     }
   }
-
+  
+  @Override
   public int delete(int no) {
     try (PreparedStatement stmt = con.prepareStatement(
         "delete from lms_photo where photo_id = ?")) {
@@ -110,6 +116,7 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
       stmt.setInt(1, no);
 
       return stmt.executeUpdate();
+      
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

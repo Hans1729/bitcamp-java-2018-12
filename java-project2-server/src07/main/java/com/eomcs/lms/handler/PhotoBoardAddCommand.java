@@ -20,7 +20,7 @@ public class PhotoBoardAddCommand extends AbstractCommand {
   public void execute(Response response) throws Exception {
     PhotoBoard board = new PhotoBoard();
     board.setTitle(response.requestString("사진 제목?"));
-    board.setLessonNo(response.requestIntValue("수업?"));
+    board.setLessonNo(response.requestInt("수업?"));
     photoBoardDao.insert(board);
     
     response.println("최소 한 개의 사진 파일을 등록해야 합니다.");
@@ -49,5 +49,6 @@ public class PhotoBoardAddCommand extends AbstractCommand {
     response.println("저장하였습니다.");
   }
 }
+
 
 

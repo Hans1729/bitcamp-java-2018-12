@@ -20,7 +20,7 @@ public class PhotoBoardUpdateCommand extends AbstractCommand {
   @Override
   public void execute(Response response) throws Exception {
     PhotoBoard board = new PhotoBoard();
-    board.setNo(response.requestIntValue("번호?"));
+    board.setNo(response.requestInt("번호?"));
     
     PhotoBoard origin = photoBoardDao.findByNo(board.getNo());
     if (origin == null) {
@@ -76,6 +76,7 @@ public class PhotoBoardUpdateCommand extends AbstractCommand {
     response.println("변경했습니다.");
   }
 }
+
 
 
 

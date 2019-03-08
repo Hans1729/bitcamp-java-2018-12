@@ -13,15 +13,11 @@ public class MemberListCommand extends AbstractCommand {
   
   @Override
   public void execute(Response response) throws Exception {
-
-      List<Member> members = memberDao.findAll();
-      
-      for (Member member : members) {
-        response.println(String.format("%3d, %-4s, %-20s, %-15s, %s\n", 
-            member.getNo(), member.getName(), 
-            member.getEmail(), member.getTel(), member.getRegisteredDate()));
-      }
-
+    List<Member> members = memberDao.findAll();
+    for (Member member : members) {
+      response.println(String.format("%3d, %-4s, %-20s, %-15s, %s", 
+          member.getNo(), member.getName(), 
+          member.getEmail(), member.getTel(), member.getRegisteredDate()));
     }
   }
-
+}

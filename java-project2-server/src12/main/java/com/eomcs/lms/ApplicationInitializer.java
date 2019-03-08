@@ -37,20 +37,17 @@ public class ApplicationInitializer implements ApplicationContextListener {
 
   @Override
   public void contextInitialized(Map<String, Object> context) {
-
     try {
       // 커넥션풀(DataSource) 객체 준비 
       DataSource dataSource = new DataSource(
           "org.mariadb.jdbc.Driver",
           "jdbc:mariadb://localhost/bitcampdb",
           "bitcamp",
-             "1111");
+          "1111");
       
-
       // 다른 객체에서도 DataSource를 사용할 수 있도록 보관소 저장한다.
       context.put("dataSource", dataSource);
       
-    
       // DAO 객체 준비
       LessonDaoImpl lessonDao = new LessonDaoImpl(dataSource);
       MemberDaoImpl memberDao = new MemberDaoImpl(dataSource);

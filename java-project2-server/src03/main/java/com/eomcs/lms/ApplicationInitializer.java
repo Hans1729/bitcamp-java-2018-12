@@ -41,7 +41,6 @@ public class ApplicationInitializer implements ApplicationContextListener {
       LessonDaoImpl lessonDao = new LessonDaoImpl(con);
       MemberDaoImpl memberDao = new MemberDaoImpl(con);
       BoardDaoImpl boardDao = new BoardDaoImpl(con);
-
       
       context.put("/lesson/add", new LessonAddCommand(lessonDao));
       context.put("/lesson/list", new LessonListCommand(lessonDao));

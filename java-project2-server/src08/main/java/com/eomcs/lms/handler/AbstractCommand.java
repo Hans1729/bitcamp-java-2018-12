@@ -15,6 +15,9 @@ public abstract class AbstractCommand implements Command {
   public void execute(BufferedReader in, PrintWriter out) {
     try {
       execute(new Response(in, out));
+      // 정상적으로 작업이 끝났을 때 commit을 수행한다.
+      ApplicationInitializer.con.commit();
+      
     } catch (Exception e) {
       // 예외가 발생하면 커넥션을 통해 데이터 변경 작업을 했던 것을 모두 취소한다.
       try {

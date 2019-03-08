@@ -7,6 +7,7 @@ import com.eomcs.lms.domain.Member;
 public interface MemberDao {
   void insert(Member member);
   List<Member> findAll();
+  List<Member> findByKeyword(String keyword);
   Member findByNo(int no);
   int update(Member member);
   int delete(int no);

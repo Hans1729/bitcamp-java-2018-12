@@ -15,8 +15,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   @Override
   public List<PhotoBoard> findAll() {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select photo_id, titl, cdt, vw_cnt, lesson_id from lms_photo"
             + " order by photo_id desc")) {
 
@@ -43,8 +43,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   @Override
   public void insert(PhotoBoard photoBoard) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "insert into lms_photo(titl,lesson_id) values(?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
 
@@ -65,7 +65,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   @Override
   public PhotoBoard findByNo(int no) {
     Connection con = ConnectionFactory.create();
-    try{
+    
+    try {
       // 조회수 증가시키기
       try (PreparedStatement stmt = con.prepareStatement(
           "update lms_photo set vw_cnt = vw_cnt + 1 where photo_id = ?")) {
@@ -103,8 +104,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   @Override
   public int update(PhotoBoard photoBoard) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "update lms_photo set titl = ? where photo_id = ?")) {
 
       stmt.setString(1, photoBoard.getTitle());
@@ -119,8 +120,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   @Override
   public int delete(int no) {
     Connection con = ConnectionFactory.create();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "delete from lms_photo where photo_id = ?")) {
 
       stmt.setInt(1, no);

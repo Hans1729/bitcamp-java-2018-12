@@ -3,18 +3,18 @@ package com.eomcs.lms.handler;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
-public class AbstractCommand implements Command {
- 
-//추상 클래스의 목적?
-//=> 서브 클래스에게 필드나 메서드를 상속해 주는 용도.
-//=> 직접 사용하지 못한다.
-//
+// 추상 클래스의 목적?
+// => 서브 클래스에게 필드나 메서드를 상속해 주는 용도.
+// => 직접 사용하지 못한다.
+// 
+public abstract class AbstractCommand implements Command {
+  
   @Override
   public void execute(BufferedReader in, PrintWriter out) {
-    try{
-      execute(new Response(in,out));
-    }catch (Exception e) {
-      out.printf("실행 오류! :%s\n" , e.getMessage());
+    try {
+      execute(new Response(in, out));
+    } catch (Exception e) {
+      out.printf("실행 오류! : %s\n", e.getMessage());
     }
   }
   
@@ -24,5 +24,5 @@ public class AbstractCommand implements Command {
     // 왜? 서브 클래스는 Command의 execute(BufferedReader, PrintWriter)를 
     // 오버라이딩 할지도 모르기 때문이다. 
     // 
-   }
+  }
 }

@@ -42,7 +42,7 @@
 	<select id="select3" resultMap="boardMap" parameterType="map">
 		select *
 		from x_board
-		where 
+		where 1=0
 		<if test="no != null">
 			 board_id = #{no}
 		</if>
@@ -132,7 +132,7 @@
 		from x_board
 		order by
 		<if test="column != null">
-			${column} ${sort}
+			${column} ${sort}boardMap
 		</if>
 	</select>
 

@@ -14,11 +14,10 @@ public class MemberDeleteCommand implements Command {
   @Override
   public void execute(BufferedReader in, PrintWriter out) {
     try {
-    out.println("번호? ");
-    out.println("!{}!");
-    out.flush();
-    int no = Integer.parseInt(in.readLine());
-    
+      out.println("번호?\n!{}!");
+      out.flush();
+      int no = Integer.parseInt(in.readLine());
+      
       if (memberDao.delete(no) == 0) {
         out.println("해당 번호의 회원이 없습니다.");
         return;
