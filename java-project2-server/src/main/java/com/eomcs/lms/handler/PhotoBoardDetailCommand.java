@@ -15,6 +15,7 @@ public class PhotoBoardDetailCommand extends AbstractCommand {
       PhotoFileDao photoFileDao) {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
+    this.name = "/photoboard/detail";
   }
 
   @Override
@@ -31,7 +32,7 @@ public class PhotoBoardDetailCommand extends AbstractCommand {
       return;
     }
     
-    photoBoardDao.increaseCount(no);
+    photoBoardDao.increaseCount(no); // 조회수 증가
     
     response.println(String.format("제목: %s", board.getTitle()));
     response.println(String.format("작성일: %s", board.getCreatedDate()));
