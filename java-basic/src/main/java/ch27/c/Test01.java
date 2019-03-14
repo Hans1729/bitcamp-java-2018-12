@@ -17,16 +17,16 @@ public class Test01 {
    // => 기본 생성자 꺼내기
    @SuppressWarnings("unchecked")
   Constructor<?> c1 = (Constructor<Student>)clazz.getConstructor();
-   
+
    Student s2 =  (Student) c1.newInstance();
-   
+   System.out.println(s2);
+
    // => 파라미터로 
    @SuppressWarnings("unchecked")
   Constructor<Student> c2 = 
     (Constructor<Student>)clazz.getConstructor(String.class, String.class);
    Student s3 = c2.newInstance("홍길동", " hong@test.com");
-   System.out.println(s3);
-   
+   System.out.println(s3);   
    
   }
 

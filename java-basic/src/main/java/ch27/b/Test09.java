@@ -9,7 +9,6 @@ public class Test09 {
     
     Class<?> superClass = clazz.getSuperclass();
       System.out.println(superClass.getName());
-    
     }
     
     

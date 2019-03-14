@@ -5,16 +5,16 @@ import java.lang.reflect.Method;
 
 public class Test02 {
   public static void main(String[] args) throws Exception {
-    Student s1 = new Student("홍길동" , "hong@test.com", true, 25);
-    
+    Student s1 = new Student("홍길동" , "hong@test.com", true, 25); 
+
     // 인스턴스 메서드 호출하기:
     // => setName() 메서드 꺼내기 
     //Method m1 = Student.class.getMethod("setName", String.class);
     //Method m1 = Class.forName("ch27.c.Student").getMethod("setName", String.class);
-    Method m1 = s1.getClass().getMethod("setName", String.class);
+    Method m1 = s1.getClass().getMethod("setName" , String.class);
 
     // => invoke( 객체 주소 , 파라미터값, ... ) ; 
-    m1.invoke(s1, "임꺽정");// => s1.setName("임꺽정")
+       m1.invoke(s1, "임꺽정");// => s1.setName("임꺽정")
 
     // 스태틱 메서드 호출하기
     Method m2 = s1.getClass().getMethod("greeting", String.class, int.class , boolean.class);

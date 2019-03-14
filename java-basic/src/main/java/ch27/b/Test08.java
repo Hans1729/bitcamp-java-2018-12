@@ -1,9 +1,6 @@
 // reflection API - 클래스가 구현한 인터페이스 알아내기
 package ch27.b;
 
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
-
 public class Test08 {
 
   public static void main(String[] args) throws Exception {
@@ -14,7 +11,6 @@ public class Test08 {
     for(Class<?> c : interfaces) {
       System.out.println(c.getName());
     }
-    
     }
     
     
