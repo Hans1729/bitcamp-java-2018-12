@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="output" path="bin/default"/>
 	<classpathentry output="bin/main" kind="src" path="src/main/java">
 		<attributes>
 			<attribute name="gradle_scope" value="main"/>
@@ -25,6 +24,7 @@
 			<attribute name="gradle_used_by_scope" value="test"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="output" path="bin/default"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
 	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.5.0/e11d2e1b4da8367d6805a55fc2471bf2ced339f4/mybatis-3.5.0-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.5.0/2db32dc396b5e7f385d71e6e212c3134283f2264/mybatis-3.5.0.jar">
 		<attributes>
@@ -36,7 +36,62 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.1.5.RELEASE/9f42597b821f59087bf759695992c5ea8a1fcf0d/spring-context-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.1.5.RELEASE/d39299241a2c8353d83f0f0c84d3677973da7c57/spring-context-5.1.5.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/2.0.0/d5ef1bf42579d1e494e04ccc7c0908fb90eb5f34/mybatis-spring-2.0.0-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/2.0.0/da66c4309603671d9dad31ec8187ccaa520cf79c/mybatis-spring-2.0.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-dbcp2/2.6.0/e1f52b1b1bd39b1b2343ed6becfe23ec0deb84f8/commons-dbcp2-2.6.0-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-dbcp2/2.6.0/78d0e99c4bc815a9f20cf6837761e91b7fc6eef4/commons-dbcp2-2.6.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/5.1.5.RELEASE/f0168c568975bcd92874fafe0a4cf8eff952b543/spring-jdbc-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/5.1.5.RELEASE/67a6be20d032276a12a91fce4fe8b13ccc8c95d/spring-jdbc-5.1.5.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/26.0-jre/2e35b51c759ae1a6edbb967b65c525105536d382/guava-26.0-jre-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/26.0-jre/6a806eff209f36f635f943e16d97491f00f6bfab/guava-26.0-jre.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.1.5.RELEASE/992ff1c4ce798a61c8d060c3edc7b08742fa36a/spring-aop-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.1.5.RELEASE/5e6ab23bc14369b0e29881afd85ad13b79846a0e/spring-aop-5.1.5.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/5.1.5.RELEASE/a0b2d9548895774bea629d0232da913dcbac96eb/spring-tx-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/5.1.5.RELEASE/c2d39bf1f87a7b9f74a199b3aa37ffc8be84b918/spring-tx-5.1.5.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.1.5.RELEASE/65b8846a1d79cfff2bcd44e0d40c5f95c5cb2d14/spring-beans-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.1.5.RELEASE/58b10c61f6bf2362909d884813c4049b657735f5/spring-beans-5.1.5.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.1.5.RELEASE/f03464511a63a756a470827c890de12b733412ba/spring-expression-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.1.5.RELEASE/b728a06924560ee69307a52d100e6b156d9a4a80/spring-expression-5.1.5.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.1.5.RELEASE/407c8f57c15605a13c76a869357181825a7a5db1/spring-core-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.1.5.RELEASE/aacc4555108f3da913a58114b2aebc819f58cce4/spring-core-5.1.5.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-pool2/2.6.1/3667c52f277d64d6a8e8542297b74cd2282fd39a/commons-pool2-2.6.1-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-pool2/2.6.1/4a285ecdea96fd7b621091b334224c527ae420fb/commons-pool2-2.6.1.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -62,6 +117,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/886474da3f761d39fcbb723d97ecc5089e731f42/animal-sniffer-annotations-1.14-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/775b7e22fb10026eed3f86e8dc556dfafe35f2d5/animal-sniffer-annotations-1.14.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.1.5.RELEASE/6f3212c91ac78f8cc4bcaf600f624f92a6287ca6/spring-jcl-5.1.5.RELEASE-sources.jar" kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.1.5.RELEASE/5cbd44d11a031c64c788edf1f99706b31c434469/spring-jcl-5.1.5.RELEASE.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
