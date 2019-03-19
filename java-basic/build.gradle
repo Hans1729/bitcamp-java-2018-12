@@ -37,6 +37,10 @@ dependencies {
     // Spring IoC 컨테이너
     compile group: 'org.springframework', name: 'spring-context', version: '5.1.5.RELEASE'
     
+    // javax Annotation API(for OpenJDK, Oracle JDK includes)
+    compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
+    
+    
     implementation 'com.google.guava:guava:26.0-jre'
     testImplementation 'junit:junit:4.12'
 }
