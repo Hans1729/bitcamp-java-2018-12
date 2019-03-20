@@ -9,7 +9,7 @@ import design_pattern.proxy.after.server.CalculatorStub;
 public class App {
 
   public static void main(String[] args) throws Exception{
-    Scanner keyboard = new Scanner(System.in);
+      Scanner keyboard = new Scanner(System.in);
 
 
     // 클라이언트 개발자가 원격에 있는 객체를 사용하기 위해서

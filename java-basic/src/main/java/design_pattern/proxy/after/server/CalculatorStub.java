@@ -3,7 +3,6 @@ package design_pattern.proxy.after.server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
-import javax.management.RuntimeErrorException;
 
 // 클라이언트 요청을 서버에 전달하고 서버의 작업 결과를 클라이언트에게 리턴하는 일을 한다.
 // => 즉 중개인 역활을 수행한다.
@@ -12,7 +11,7 @@ import javax.management.RuntimeErrorException;
 //  => 객체가 있는 서버 측에서 요청과 응답을 대행하는 ORB를 "스켈레톤(skeleton)"이라 부른다.
 //  => 객체를 사용하는 클라이언트측에서 요청과 응답을 대행하는 ORB를 "스텁(stub)"이라 부른다.
 // 
-// 스텁은 실제 일을 하는 객체를 대행하기 떄문에 값은 규칙에 따라 구현되어야 하낟.
+// 스텁은 실제 일을 하는 객체를 대행하기 떄문에 값은 규칙에 따라 구현되어야 한다.
 // => 클라이언트는 이 스텁 클래스가 실제 일을 하는 객체인양 그대로 사용된다..
 // => 이렇게 실제 일을 하는 객체와 같은 규칙을 따르지만 메서드가 호출 될 때 
 //    자신이 직접 일을 하지 않고, 실제 일을 하는 객체에게 위임한다.
