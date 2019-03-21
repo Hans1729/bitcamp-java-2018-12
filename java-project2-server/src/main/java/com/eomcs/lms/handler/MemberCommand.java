@@ -1,22 +1,23 @@
 package com.eomcs.lms.handler;
 import java.util.List;
-import com.eomcs.lms.context.Component;
+import org.springframework.stereotype.Component;
 import com.eomcs.lms.context.RequestMapping;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.lms.service.MemberService;
 
 @Component
-public class MemberCommand  {
+public class MemberCommand {
   
-  MemberDao memberDao;
+  MemberService memberServices;
   
-  public MemberCommand(MemberDao memberDao) {
-    this.memberDao = memberDao;
+  public MemberCommand(MemberService memberServices) {
+    this.memberServices = memberServices;
   }
   
   @RequestMapping("/member/list")
   public void list(Response response) throws Exception {
-    List<Member> members = memberDao.findAll();
+    List<Member> members = memberServices.list();
     for (Member member : members) {
       response.println(String.format("%3d, %-4s, %-20s, %-15s, %s", 
           member.getNo(), member.getName(), 
@@ -24,30 +25,24 @@ public class MemberCommand  {
     }
   }
   
+  @RequestMapping("/member/add")
+  public void add(Response response) throws Exception {
+    Member member = new Member();
+    member.setName(response.requestString("이름?"));
+    member.setEmail(response.requestString("이메일?"));
+    member.setPassword(response.requestString("암호?"));
+    member.setPhoto(response.requestString("사진?"));
+    member.setTel(response.requestString("전화?"));
 
-    @RequestMapping("/member/add")
-    public void add(Response response) throws Exception {
-      Member member = new Member();
-      member.setName(response.requestString("이름?"));
-      member.setEmail(response.requestString("이메일?"));
-      member.setPassword(response.requestString("암호?"));
-      member.setPhoto(response.requestString("사진?"));
-      member.setTel(response.requestString("전화?"));
-
-      memberDao.insert(member);
-      response.println("저장하였습니다.");
-    }
+    memberServices.add(member);
+    response.println("저장하였습니다.");
+  }
   
-    
   @RequestMapping("/member/detail")
   public void detail(Response response) throws Exception {
     int no = response.requestInt("번호?");
 
-    Member member = memberDao.findByNo(no);
-    if (member == null) {
-      response.println("해당 번호의 회원이 없습니다.");
-      return;
-    }
+    Member member = memberServices.get(no);
     
     response.println(String.format("이름: %s", member.getName()));
     response.println(String.format("이메일: %s", member.getEmail()));
@@ -57,10 +52,10 @@ public class MemberCommand  {
   }
   
   @RequestMapping("/member/update")
-  public void execute(Response response) throws Exception {
+  public void update(Response response) throws Exception {
     int no = response.requestInt("번호?");
 
-    Member member = memberDao.findByNo(no);
+    Member member = memberServices.get(no);
     if (member == null) {
       response.println("해당 번호의 회원이 없습니다.");
       return;
@@ -99,7 +94,7 @@ public class MemberCommand  {
         || temp.getPhoto() != null
         || temp.getTel() != null) {
       
-      memberDao.update(temp);
+      memberServices.update(temp);
       response.println("변경했습니다.");
       
     } else {
@@ -107,11 +102,22 @@ public class MemberCommand  {
     }
   }
   
-  @RequestMapping("/member/serach")
-  public void serach(Response response) throws Exception {
+  @RequestMapping("/member/delete")
+  public void delete(Response response) throws Exception {
+    int no = response.requestInt("번호?");
+
+    if (memberServices.delete(no) == 0) {
+      response.println("해당 번호의 회원이 없습니다.");
+      return;
+    }
+    response.println("삭제했습니다.");
+  }
+  
+  @RequestMapping("/member/search")
+  public void search(Response response) throws Exception {
     
     String keyword = response.requestString("검색어?");
-    List<Member> members = memberDao.findByKeyword(keyword);
+    List<Member> members = memberServices.findByKeyword(keyword);
 
     for (Member member : members) {
       response.println(String.format("%3d, %-4s, %-20s, %-15s, %s", 
@@ -119,16 +125,4 @@ public class MemberCommand  {
           member.getEmail(), member.getTel(), member.getRegisteredDate()));
     }
   }
-  @RequestMapping("/member/delete")
-  public void delete(Response response) throws Exception {
-    int no = response.requestInt("번호?");
-
-    if (memberDao.delete(no) == 0) {
-      response.println("해당 번호의 회원이 없습니다.");
-      return;
-    }
-    response.println("삭제했습니다.");
-  }
-  
-  
 }
