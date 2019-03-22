@@ -18,7 +18,7 @@
 			<attribute name="gradle_used_by_scope" value="test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-12"/>
 	<classpathentry kind="lib" path="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.4.0/87f88656d9cf5381fc3c11c8e52d42f9eb23247c/mariadb-java-client-2.4.0.jar" sourcepath="/home/bitcamp/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.4.0/80dfa28a6c0c5e91d41ea12141792ef55377afd9/mariadb-java-client-2.4.0-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>

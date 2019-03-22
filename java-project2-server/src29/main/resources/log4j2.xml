@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+    <Console name="Console">
+      <PatternLayout pattern="%[-5level] - %C => %msg%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="Console"/>
+    </Root>
+   <logger name="com.eomcs.lms" level="ERROR" addtivity="false">
+      <AppenderRef ref="Console"/>
+    </logger>
+  </Loggers>
+</Configuration>
