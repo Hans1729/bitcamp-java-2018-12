@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.eomcs.lms.ServerApp;
+import com.eomcs.lms.InitServlet;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
@@ -20,7 +20,7 @@ public class MemberDeleteServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     MemberService memberService = 
-        ServerApp.iocContainer.getBean(MemberService.class);
+        InitServlet.iocContainer.getBean(MemberService.class);
     List<Member> members = memberService.list(null);
     
      request.setCharacterEncoding("UTF-8");

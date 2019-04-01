@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.eomcs.lms.ServerApp;
+import com.eomcs.lms.InitServlet;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
 
@@ -21,7 +21,7 @@ public class BoardListServlet extends HttpServlet {
   
     // Spirng IoC 컨테이너를 알아낸다.
    BoardService boardService =
-       ServerApp.iocContainer.getBean(BoardService.class);
+       InitServlet.iocContainer.getBean(BoardService.class);
      
     List<Board> boards = boardService.list();
     response.setContentType("text/html;charset=UTF-8");

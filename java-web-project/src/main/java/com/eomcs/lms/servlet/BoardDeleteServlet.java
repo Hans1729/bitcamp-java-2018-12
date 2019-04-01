@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
-import com.eomcs.lms.ServerApp;
+import com.eomcs.lms.InitServlet;
 import com.eomcs.lms.context.RequestMapping;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
@@ -27,7 +27,7 @@ public class BoardDeleteServlet extends HttpServlet{
   
     int no = Integer.parseInt(request.getParameter("no"));
     BoardService boardService = 
-        ServerApp.iocContainer.getBean(BoardService.class);
+        InitServlet.iocContainer.getBean(BoardService.class);
      
     response.setContentType("text/html; charset=UTF-8");
     PrintWriter out = response.getWriter();
