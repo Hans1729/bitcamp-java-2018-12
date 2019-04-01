@@ -34,4 +34,3 @@ public class Test01 {
     int local;
   }
 }
-
