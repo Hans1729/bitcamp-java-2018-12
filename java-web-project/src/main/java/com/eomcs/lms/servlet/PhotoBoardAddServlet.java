@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -13,12 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import com.eomcs.lms.InitServlet;
-import com.eomcs.lms.domain.Board;
+import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
-import com.eomcs.lms.service.BoardService;
 import com.eomcs.lms.service.LessonService;
 import com.eomcs.lms.service.PhotoBoardService;
 
@@ -38,27 +37,35 @@ public class PhotoBoardAddServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    LessonService lessonService = InitServlet.iocContainer.getBean(LessonService.class);
-  
+
+    ServletContext sc = this.getServletContext();
+    ApplicationContext iocContainer = 
+        (ApplicationContext) sc.getAttribute("iocContainer");
+    LessonService lessonService = 
+        iocContainer.getBean(LessonService.class);
+    
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
     out.println("<html>");
     out.println("<head><title>새 사진</title></head>");
     out.println("<body>");
+    
+    // 헤더를 출력한다.
+    request.getRequestDispatcher("/header").include(request, response);
+
     out.println("<h1>새 사진</h1>");
     out.println("<form action='add' method='post' enctype='multipart/form-data'>");
     out.println("<table border='1'>");
-    
+    out.println("<tr>");
     out.println("  <th>수업</th>");
     out.println("  <td><select name='lessonNo'>");
-    out.println("       <option value='0'>수업을 선택하세요</option>");
+    out.println("      <option value='0'>수업을 선택하세요</option>");
     
-    List<Lesson> lessons= lessonService.list();
-    for(Lesson lesson : lessons) {
-      out.printf("<option value='%d' > %s<%s ~ %s></option>",
-          lesson.getNo(),
-           lesson.getTitle(),lesson.getStartDate(), lesson.getEndDate());
+    List<Lesson> lessons = lessonService.list();
+    for (Lesson lesson : lessons) {
+      out.printf("      <option value='%d'>%s</option>", 
+          lesson.getNo(), lesson.getTitle());
     }
     
     out.println("  </select></td>");
@@ -67,7 +74,6 @@ public class PhotoBoardAddServlet extends HttpServlet {
     out.println("  <th>사진 제목</th>");
     out.println("  <td><input type='text' name='title'></td>");
     out.println("</tr>");
-    out.println("<tr>");
     out.println("<tr>");
     out.println("  <td colspan='2'>최소 한 개의 사진 파일을 등록해야 합니다.</td>");
     out.println("</tr>");
@@ -105,9 +111,10 @@ public class PhotoBoardAddServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-
-
-    PhotoBoardService photoBoardService = InitServlet.iocContainer.getBean(PhotoBoardService.class);
+    ServletContext sc = this.getServletContext();
+    ApplicationContext iocContainer = 
+        (ApplicationContext) sc.getAttribute("iocContainer");
+    PhotoBoardService photoBoardService = iocContainer.getBean(PhotoBoardService.class);
 
     PhotoBoard board = new PhotoBoard();
     board.setTitle(request.getParameter("title"));
@@ -129,19 +136,24 @@ public class PhotoBoardAddServlet extends HttpServlet {
     }
     board.setFiles(files);
 
+    
+    
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     out.println("<html><head>" + "<title>사진 등록</title>"
         + "<meta http-equiv='Refresh' content='1;url=list'>" + "</head>");
     out.println("<body><h1>사진 등록</h1>");
-    
-    if(board.getLessonNo() == 0 ) {
+
+    if (board.getLessonNo() == 0) {
       out.println("<p>사진 또는 파일을 등록할 수업을 선택하세요.</p>");
-    }else if (files.size() == 0 ) {
-      out.println("<p>최소 한 개의 사진 파일을 등록해야 합니다.");
+      
+    } else if (files.size() == 0) {
+      out.println("<p>최소 한 개의 사진 파일을 등록해야 합니다.</p>");
+
     } else {
       photoBoardService.add(board);
-      out.println("<p>저장하였습니다.</p>");
+      response.sendRedirect("list");
+      return;
     }
     out.println("</body></html>");
   }

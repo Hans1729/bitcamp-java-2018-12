@@ -3,12 +3,13 @@ package com.eomcs.lms.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.eomcs.lms.InitServlet;
+import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
@@ -23,10 +24,14 @@ public class PhotoBoardDetailServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    ServletContext sc = this.getServletContext();
+    ApplicationContext iocContainer = 
+        (ApplicationContext) sc.getAttribute("iocContainer");
     PhotoBoardService photoBoardService = 
-        InitServlet.iocContainer.getBean(PhotoBoardService.class);
+        iocContainer.getBean(PhotoBoardService.class);
     LessonService lessonService = 
-        InitServlet.iocContainer.getBean(LessonService.class);
+        iocContainer.getBean(LessonService.class);
+
     response.setContentType("text/html;charset=UTF-8");
 
     int no = Integer.parseInt(request.getParameter("no"));
@@ -37,6 +42,10 @@ public class PhotoBoardDetailServlet extends HttpServlet {
     out.println("<html>");
     out.println("<head><title>사진 조회</title></head>");
     out.println("<body>");
+
+    // 헤더를 출력한다.
+    request.getRequestDispatcher("/header").include(request, response);
+
     out.println("<h1>사진 조회</h1>");
 
     if (board == null) {
@@ -61,19 +70,25 @@ public class PhotoBoardDetailServlet extends HttpServlet {
       out.println("  <th>조회수</th>");
       out.printf("  <td>%d</td>\n", board.getViewCount());
       out.println("</tr>");
+
       out.println("<tr>");
       out.println("  <th>수업</th>");
       out.println("  <td><select name='lessonNo'>");
-      
+
       List<Lesson> lessons = lessonService.list();
       for (Lesson lesson : lessons) {
         out.printf("      <option value='%d' %s>%s(%s ~ %s)</option>\n", 
             lesson.getNo(), 
             board.getLessonNo() == lesson.getNo() ? "selected" : "",
-            lesson.getTitle(),
-            lesson.getStartDate(), 
-            lesson.getEndDate());
+                lesson.getTitle(),
+                lesson.getStartDate(), 
+                lesson.getEndDate());
       }
+
+      out.println("  </select></td>");
+      out.println("</tr>");      
+
+
       out.println("<tr>");
       out.println("  <td colspan='2'>최소 한 개의 사진 파일을 등록해야 합니다.</td>");
       out.println("</tr>");

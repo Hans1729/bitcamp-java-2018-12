@@ -1,36 +1,46 @@
 package com.eomcs.lms.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.eomcs.lms.InitServlet;
+import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
 
 @SuppressWarnings("serial")
 @WebServlet("/board/detail")
-public class BoardDetailServlet  extends HttpServlet{
-  
-   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+public class BoardDetailServlet extends HttpServlet {
+
+  @Override
+  protected void doGet(
+      HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-     
-     // Spirng IoC 컨테이너를 알아낸다.
-     BoardService boardService =
-         InitServlet.iocContainer.getBean(BoardService.class);
+    
+    // Spring IoC 컨테이너에서 BoardService 객체를 꺼낸다.
+    ServletContext sc = this.getServletContext();
+    ApplicationContext iocContainer = 
+        (ApplicationContext) sc.getAttribute("iocContainer");
+    BoardService boardService = 
+        iocContainer.getBean(BoardService.class);
     
     int no = Integer.parseInt(request.getParameter("no"));
     
     Board board = boardService.get(no);
     
-    response.setContentType("text/html; charset=UTF8");
+    response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     
     out.println("<html><head><title>게시물 조회</title></head>");
-    out.println("<body><h1>게시물 조회</h1>");
+    out.println("<body>");
+    
+    // 헤더를 출력한다.
+    request.getRequestDispatcher("/header").include(request, response);
+    
+    out.println("<h1>게시물 조회</h1>");
     
     if (board == null) {
       out.println("<p>해당 번호의 게시물이 없습니다.</p>");
@@ -60,6 +70,7 @@ public class BoardDetailServlet  extends HttpServlet{
     }
     out.println("</body></html>");
   }
+
 }
 
 

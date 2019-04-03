@@ -65,7 +65,10 @@ create table lms_photo_file (
  references lms_photo (photo_id)
 ) comment '사진 게시물 첨부파일 테이블'; 
 
-
+CREATE UNIQUE INDEX UIX_lms_member_email
+  ON lms_member ( 
+  email ASC 
+  );
 
 
 
