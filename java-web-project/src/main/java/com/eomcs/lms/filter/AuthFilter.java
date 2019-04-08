@@ -17,13 +17,11 @@ public class AuthFilter implements Filter {
   
   FilterConfig filterConfig;
   String contextRootPath; // 예) /java-web-project
-
   
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     this.filterConfig = filterConfig;
     contextRootPath = filterConfig.getServletContext().getContextPath();
-  
   }
   
   @Override
@@ -53,6 +51,7 @@ public class AuthFilter implements Filter {
         return;
       }
     }
+    
     // 그런 후에 다음 필터나 또는 최종 목적지인 서블릿을 실행한다.
     chain.doFilter(request, response);
   }

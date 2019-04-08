@@ -7,9 +7,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
-@WebFilter("/*")
+//@WebFilter("/*")  // web.xml에 필터를 선언하였다.
 public class CharacterEncodingFilter implements Filter {
   
   FilterConfig filterConfig;
@@ -19,7 +18,7 @@ public class CharacterEncodingFilter implements Filter {
   public void init(FilterConfig filterConfig) throws ServletException {
     this.filterConfig = filterConfig;
     encoding = filterConfig.getInitParameter("encoding");
-    if(encoding == null) {
+    if (encoding == null) {
       encoding = "UTF-8";
     }
   }

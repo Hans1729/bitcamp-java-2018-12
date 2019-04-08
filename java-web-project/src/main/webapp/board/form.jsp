@@ -9,7 +9,7 @@
 
 <jsp:include page="/header.jsp"/>
 
-  <h1>새 글(JSP)</h1>
+  <h1>새 글(JSP2)</h1>
   <form action='add' method='post'>
     <table border='1'>
       <tr>

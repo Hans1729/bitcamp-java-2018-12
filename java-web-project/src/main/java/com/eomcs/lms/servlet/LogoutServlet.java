@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 @WebServlet("/auth/logout")
 public class LogoutServlet extends HttpServlet {
-
+  
   @Override
   protected void doGet(
       HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-     
-     // 세션을 무효화시킨다.
+      throws ServletException, IOException {
+
+    // 세션을 무효화시킨다.
     request.getSession().invalidate();
     
     // 메인 화면으로 보낸다.
     response.sendRedirect(getServletContext().getContextPath());
   }
 }
+
 
 
 

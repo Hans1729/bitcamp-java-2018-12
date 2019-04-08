@@ -39,8 +39,6 @@ public class BoardUpdateServlet extends HttpServlet {
     request.setAttribute("error.content", "해당 번호의 게시물이 없습니다.");
     
     request.getRequestDispatcher("/error.jsp").forward(request, response);
-    
-    
   }
  
 }
