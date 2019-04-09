@@ -18,8 +18,9 @@ public class BoardAddServlet extends HttpServlet {
   protected void doGet(
       HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/board/form.jsp").include(request, response);
+    
+    // 뷰 컴포넌트의 URL을  ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl", "/board/form.jsp");
   }
   
   @Override
@@ -39,7 +40,8 @@ public class BoardAddServlet extends HttpServlet {
     
     boardService.add(board);
     
-    response.sendRedirect("list");
+    // 뷰 컴포넌트의 URL을  ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl", "redirect:list");
   }
 }
 
