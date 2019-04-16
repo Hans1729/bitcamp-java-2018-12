@@ -7,7 +7,7 @@
     <body>
 
     <h1>새 사진(JSP2 + EL + JSTL)</h1>
-    <form action='form' method='post' enctype='multipart/form-data'>
+    <form action='add' method='post' enctype='multipart/form-data'>
     <table border='1'>
     <tr>
       <th>수업</th>

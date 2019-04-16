@@ -1,13 +1,13 @@
 package com.eomcs.lms.controller;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.eomcs.lms.context.RequestMapping;
-import com.eomcs.lms.context.RequestParam;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
@@ -20,17 +20,21 @@ public class AuthController {
   @Autowired ServletContext servletContext;
   
   @RequestMapping("/auth/form")
-  public String form(HttpServletRequest request, HttpSession session)  throws Exception{
-    
-    session.setAttribute(REFERER_URL, request.getHeader("Referer"));
+  public String form(
+      @RequestHeader("Referer") String refererUrl,
+      HttpSession session) {
+    session.setAttribute(REFERER_URL, refererUrl);
     return "/auth/form.jsp";
   }
-
+  
   @RequestMapping("/auth/login")
-  public String login(@RequestParam("email") String email,@RequestParam("password") String password,
-    @RequestParam("saveEmail") String saveEmail,  HttpSession session, HttpServletResponse response) throws Exception {
+  public String login(
+      @RequestParam("email") String email,
+      @RequestParam("password") String password,
+      @RequestParam("saveEmail") String saveEmail,
+      HttpSession session,
+      HttpServletResponse response) throws Exception {
 
-    
     // 이메일 저장을 처리한다. 
     Cookie cookie;
     if (saveEmail != null) {
@@ -47,7 +51,7 @@ public class AuthController {
     // 바로 쿠키를 추가할 수 있다.
     response.addCookie(cookie); 
 
-    Member member = memberService.get(email,password);
+    Member member = memberService.get(email, password);
 
     if (member == null) {
       return "/auth/fail.jsp";
@@ -67,7 +71,7 @@ public class AuthController {
   @RequestMapping("/auth/logout")
   public String logout(HttpSession session) throws Exception {
     session.invalidate();
-    return "redirect:" + servletContext.getContextPath();
+    return "redirect:../../";
   }
 }
 
