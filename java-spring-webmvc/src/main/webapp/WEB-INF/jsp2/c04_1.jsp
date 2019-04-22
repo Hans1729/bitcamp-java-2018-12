@@ -7,8 +7,9 @@
 <title>jsp</title>
 </head>
 <body>
-<h1>/WEB-INF/jsp2/c01_1/h1.jsp</h1>
-이름 : ${name}<br>
-나이 : ${age}<br>
+<h1>/WEB-INF/jsp2/c04_1.jsp</h1>
+<%
+System.out.print("c04_1.jsp 실행");
+%>
 </body>
 </html>
