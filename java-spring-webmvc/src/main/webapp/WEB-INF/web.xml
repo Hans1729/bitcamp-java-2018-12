@@ -20,6 +20,11 @@
     </multipart-config>
   </servlet>
   
+  <servlet-mapping>
+    <servlet-name>app1</servlet-name>
+    <url-pattern>/app1/*</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <servlet-name>app2</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -30,11 +35,6 @@
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>app1</servlet-name>
-    <url-pattern>/app1/*</url-pattern>
-  </servlet-mapping>
- 
-   <servlet-mapping>
     <servlet-name>app2</servlet-name>
     <url-pattern>/app2/*</url-pattern>
   </servlet-mapping>

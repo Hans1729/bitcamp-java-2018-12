@@ -38,8 +38,6 @@ public class BoardController {
       throw new Exception("해당 번호의 게시물이 없습니다.");
     
     return "redirect:list";
-    
-    
   }
   
   @RequestMapping("/board/detail")
@@ -76,7 +74,6 @@ public class BoardController {
       
     return "redirect:list";
   }
-
 }
 
 

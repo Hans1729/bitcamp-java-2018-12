@@ -122,7 +122,7 @@ public class PhotoBoardController {
     
     return "/photoboard/search.jsp";
   }
-
+  
   @RequestMapping("/photoboard/update")
   public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -157,6 +157,4 @@ public class PhotoBoardController {
     photoBoardService.update(board);
     return "redirect:list";
   }
-  
-  
 }

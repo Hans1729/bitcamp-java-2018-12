@@ -16,7 +16,7 @@ public class LessonController {
   @Autowired LessonService lessonService;
 
   @RequestMapping("/lesson/add")
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String add(HttpServletRequest request, HttpServletResponse response) throws Exception {
     
     if (request.getMethod().equals("GET")) {
       return "/lesson/form.jsp";
@@ -45,6 +45,7 @@ public class LessonController {
       
     return "redirect:list";
   }
+  
   @RequestMapping("/lesson/detail")
   public String detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -54,8 +55,8 @@ public class LessonController {
     request.setAttribute("lesson", lesson);
     
     return "/lesson/detail.jsp";
-  }  
-  
+  }
+
   @RequestMapping("/lesson/list")
   public String list(HttpServletRequest request, HttpServletResponse response) throws Exception {
     List<Lesson> lessons = lessonService.list();
@@ -81,6 +82,4 @@ public class LessonController {
     
     return "redirect:list";
   }
-  
-  
 }

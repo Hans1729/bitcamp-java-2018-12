@@ -14,55 +14,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+@Controller 
 @RequestMapping("/c04_4")
 public class Controller04_4 {
-  // 클라이언트가 보낸 요청 파라미터 값(String 타입)을
+
+  // 클라이언트가 보낸 요청 파라미터 값(String 타입)을 
   // request handler의 아규먼트 타입(String, int, boolean 등)의 값으로 바꿀 때
   // primitive type에 대해서만 자동으로 변환해 준다.
   // 그 외의 타입에 대해서는 프로퍼티 에디터(타입 변환기)가 없으면 예외를 발생시킨다.
-
+  
   // 테스트:
-  // http://.../c04_4/h1?model=sonata&capacity=5&auto=true&createdDate=2019-4-19
-  @GetMapping("h1")
-  @ResponseBody
-  public void handler1(PrintWriter out, String model, int capacity, // String ===> int :
-                                                                    // Integer.parseInt(String)
+  //    http://.../c04_4/h1?model=sonata&capacity=5&auto=true&createdDate=2019-4-19
+  @GetMapping("h1") 
+  @ResponseBody 
+  public void handler1(
+      PrintWriter out,
+      String model,
+      int capacity, // String ===> int : Integer.parseInt(String)
       boolean auto, // String ===> boolean : Boolean.parseBoolean(String)
       Date createdDate // 프로퍼티 에디터를 설정하지 않으면 변환 오류 발생
-  ) {
-
+      ) {
+    
     out.printf("model=%s\n", model);
     out.printf("capacity=%s\n", capacity);
     out.printf("auto=%s\n", auto);
     out.printf("createdDate=%s\n", createdDate);
   }
-
-  // 테스트:
-  // http://.../c04_4/h2?car=sonata,5,true,2019-4-19
-  @GetMapping("h2")
-  @ResponseBody
-  public void handler2(PrintWriter out,
+  
+  //테스트:
+  //    http://.../c04_4/h2?car=sonata,5,true,2019-4-19
+  @GetMapping("h2") 
+  @ResponseBody 
+  public void handler2(
+      PrintWriter out,
       // 콤마(,)로 구분된 문자열을 Car 객체로 변환하기?
       // => String ===> Car 프로퍼티 에디터를 등록하면 된다.
-      @RequestParam("car") Car car) {
-
+      @RequestParam("car") Car car
+      ) {
+    
     out.println(car);
   }
-
-  // 테스트:
-  // http://.../c04_4/h3?engine=bitengine,3500,16
-  @GetMapping("h3")
-  @ResponseBody
-  public void handler3(PrintWriter out,
-      // 콤마(,)로 구분된 문자열을 Car 객체로 변환하기?
-      // => String ===> Car 프로퍼티 에디터를 등록하면 된다.
-      @RequestParam("engine") Engine engine) {
-
+  
+  //테스트:
+  //    http://.../c04_4/h3?engine=bitengine,3500,16
+  @GetMapping("h3") 
+  @ResponseBody 
+  public void handler3(
+      PrintWriter out,
+      // 콤마(,)로 구분된 문자열을 Engine 객체로 변환하기?
+      // => String ===> Engine 프로퍼티 에디터를 등록하면 된다.
+      @RequestParam("engine") Engine engine
+      ) {
+    
     out.println(engine);
   }
-
-
+  
+  
+  
   // 프로퍼티 에디터를 프론트 컨트롤러에게 적용하기
   // => 프론트 컨트롤러는 request handler를 호출하기 전에 
   //    넘겨줄 아규먼트 값을 준비해야 한다.
@@ -95,6 +103,12 @@ public class Controller04_4 {
     binder.registerCustomEditor(
         Car.class, // String을 Car 타입으로 바꾸는 에디터임을 지정한다. 
         new CarPropertyEditor()  // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
+    );
+    
+    // WebDataBinder에 프로퍼티 에디터 등록하기
+    binder.registerCustomEditor(
+        Engine.class, // String을 Engine 타입으로 바꾸는 에디터임을 지정한다. 
+        new EnginePropertyEditor()  // 바꿔주는 일을 하는 프로퍼티 에디터를 등록한다.
     );
   }
 
@@ -161,7 +175,22 @@ public class Controller04_4 {
       setValue(car);
     }
   }
+  
+  class EnginePropertyEditor extends PropertyEditorSupport {
+    @Override
+    public void setAsText(String text) throws IllegalArgumentException {
+      String[] values = text.split(",");
+      
+      Engine engine = new Engine();
+      engine.setModel(values[0]);
+      engine.setCc(Integer.parseInt(values[1]));
+      engine.setValve(Integer.parseInt(values[1]));
+      
+      setValue(engine);
+    }
+  }
 }
+
 
 
 

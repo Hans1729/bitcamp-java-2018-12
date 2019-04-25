@@ -24,13 +24,14 @@
       cdt
   </sql>
   
-  <select id="findAll" resultMap="memberMap">
-    select 
-      <include refid="default-columns"/>
+   <select id="findAll" resultMap="memberMap" parameterType="map">
+   select
+    <include refid="default-columns"/>
+      photo
     from 
       lms_member
     order by 
-      name asc
+      member_id desc
   </select>
   
   <select id="findByNo" resultMap="memberMap" parameterType="int">
@@ -99,6 +100,10 @@
     delete from lms_member 
     where member_id = #{value}
   </delete>
+  
+<!--     <select id="countAll" resultType="int">
+    select count(*) from lms_member
+  </select> -->
 </mapper>
 
 

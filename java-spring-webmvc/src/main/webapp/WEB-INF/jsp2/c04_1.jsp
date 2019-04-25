@@ -8,8 +8,8 @@
 </head>
 <body>
 <h1>/WEB-INF/jsp2/c04_1.jsp</h1>
-<%
-System.out.print("c04_1.jsp 실행");
-%>
 </body>
 </html>
+<%
+System.out.println("c04_1.jsp 실행");
+%>

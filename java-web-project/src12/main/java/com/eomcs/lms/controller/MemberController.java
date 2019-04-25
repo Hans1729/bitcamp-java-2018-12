@@ -82,7 +82,7 @@ public class MemberController {
     
     return "/member/search.jsp";
   }
-  
+
   @RequestMapping("/member/update")
   public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -106,9 +106,4 @@ public class MemberController {
       
     return "redirect:list";
   }
-  
-  
-  
-  
-
 }
