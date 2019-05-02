@@ -9,7 +9,7 @@ public class Board implements Cloneable, Serializable {
   private int no;
   private String contents;
   
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date createdDate;
   
   private int viewCount;
