@@ -15,17 +15,8 @@ function loadList(pn) {
       
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       tbody.html(''); // 이전에 출력한 내용을 제거한다.
-      
-      var templateSrc = $('#tr-template').html();
-      
-      //Handlebars를 통해 사용하여 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
-       var trGenerator = Handlebars.compile(templateSrc);
       for (data of obj.list) {
-    	  var trHTML = trGenerator(data);
-
-    	  
-      }
-    /*	  $('<tr>')
+    	  $('<tr>')
     	  .append($('<th>').attr('scope', 'row').html(data.no))
     	  .append($('<td>').append($('<a>').addClass('bit-view-link')
     			  .attr('href', '#')
@@ -35,7 +26,7 @@ function loadList(pn) {
     	  .append($('<td>').html(data.viewCount))	  
     	  .appendTo(tbody)
     	   
-      }*/
+      }
      
       
       // 현재 페이지의 번호를 갱신한다.
