@@ -25,6 +25,7 @@ console.log(f1());
 var f2 = () => "안녕";
 console.log(f2());
 
+
 // 만약에 arrow 함수가 값을 리턴하지 않는다면?
 f2 = () => console.log("값을 리턴하지 않는다.");
 console.log(f2()); // 값을 리턴하지 않는 함수에 대해 리턴 값을 출력하려고 한다면 undefined가 된다.
@@ -36,7 +37,7 @@ console.log(f3(100, 200));
 
 // 여러 개의 문장을 가질 때는 블록{}으로 묶는다.
 // => 값을 리턴하려면 return을 명시해야 한다.
-var f4 = (a,b ) => {
+var f4 = (a,b) => {
     var result = a + b;
     return result;
 };
